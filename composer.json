@@ -3,6 +3,7 @@
     "description": "Include share social button.",
     "keywords": ["share", "facebook", "twitter", "google", "google plus", "social"],
     "type": "flarum-extension",
+    "version": "0.1.1",
     "authors": [{
         "name": "Binh Duong",
         "email": "binh.duong@vingle.net"
