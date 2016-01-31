@@ -1,6 +1,6 @@
 {
     "name": "vingle/flarum-share-social",
-    "description": "Add share social button.",
+    "description": "Include share social button.",
     "keywords": ["share", "facebook", "twitter", "google", "google plus", "social"],
     "type": "flarum-extension",
     "version": "0.1.0",

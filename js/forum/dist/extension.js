@@ -94,36 +94,44 @@ System.register('vingle/share/social/components/ShareSocialModal', ['flarum/comp
     }
   };
 });;
-System.register('vingle/share/social/main', ['flarum/extend', 'flarum/app', 'flarum/components/DiscussionPage', 'flarum/components/Button', 'vingle/share/social/components/ShareSocialModal'], function (_export) {
-  'use strict';
+System.register('vingle/share/social/main', ['flarum/extend', 'flarum/app', 'flarum/components/DiscussionPage', 'flarum/components/Button', 'vingle/share/social/components/ShareSocialModal', 'flarum/utils/string'], function (_export) {
+    'use strict';
 
-  var extend, app, DiscussionPage, Button, ShareSocialModal;
-  return {
-    setters: [function (_flarumExtend) {
-      extend = _flarumExtend.extend;
-    }, function (_flarumApp) {
-      app = _flarumApp['default'];
-    }, function (_flarumComponentsDiscussionPage) {
-      DiscussionPage = _flarumComponentsDiscussionPage['default'];
-    }, function (_flarumComponentsButton) {
-      Button = _flarumComponentsButton['default'];
-    }, function (_vingleShareSocialComponentsShareSocialModal) {
-      ShareSocialModal = _vingleShareSocialComponentsShareSocialModal['default'];
-    }],
-    execute: function () {
+    var extend, app, DiscussionPage, Button, ShareSocialModal, truncate, getPlainContent;
+    return {
+        setters: [function (_flarumExtend) {
+            extend = _flarumExtend.extend;
+        }, function (_flarumApp) {
+            app = _flarumApp['default'];
+        }, function (_flarumComponentsDiscussionPage) {
+            DiscussionPage = _flarumComponentsDiscussionPage['default'];
+        }, function (_flarumComponentsButton) {
+            Button = _flarumComponentsButton['default'];
+        }, function (_vingleShareSocialComponentsShareSocialModal) {
+            ShareSocialModal = _vingleShareSocialComponentsShareSocialModal['default'];
+        }, function (_flarumUtilsString) {
+            truncate = _flarumUtilsString.truncate;
+            getPlainContent = _flarumUtilsString.getPlainContent;
+        }],
+        execute: function () {
 
-      app.initializers.add('vingle-share-social', function () {
-        extend(DiscussionPage.prototype, 'sidebarItems', function (items) {
-          items.add('share-social', Button.component({
-            className: 'Button Button-icon Button--share',
-            icon: 'share-alt',
-            children: app.forum.attribute('vingle.share.social') ? app.forum.attribute('vingle.share.social') : 'Share',
-            onclick: function onclick() {
-              return app.modal.show(new ShareSocialModal());
-            }
-          }), 5);
-        });
-      });
-    }
-  };
+            app.initializers.add('vingle-share-social', function () {
+                extend(DiscussionPage.prototype, 'sidebarItems', function (items) {
+                    if (app.current.discussion.startPost()) {
+                        var post = app.current.discussion.startPost();
+                        var description = truncate(getPlainContent(post.contentHtml()), 150, 0);
+                        $('meta[name=description]').attr('content', description.toLowerCase());
+                    }
+                    items.add('share-social', Button.component({
+                        className: 'Button Button-icon Button--share',
+                        icon: 'share-alt',
+                        children: app.forum.attribute('vingle.share.social') ? app.forum.attribute('vingle.share.social') : 'Share',
+                        onclick: function onclick() {
+                            return app.modal.show(new ShareSocialModal());
+                        }
+                    }), 5);
+                });
+            });
+        }
+    };
 });
