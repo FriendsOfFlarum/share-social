@@ -59,6 +59,18 @@ System.register('vingle/share/social/components/ShareSocialModal', ['flarum/comp
                     }
                   }),
                   Button.component({
+                    className: 'Button Button--rounded Share--vk',
+                    icon: 'vk fa-lg',
+
+                    onclick: function onclick() {
+                      var width = 1000;
+                      var height = 500;
+                      var top = $(window).height() / 2 - height / 2;
+                      var left = $(window).width() / 2 - width / 2;
+                      window.open('http://vk.com/share.php?url=' + encodeURIComponent(app.forum.attribute('baseUrl')) + '/d/' + app.current.discussion.id() + '&description=' + encodeURIComponent(app.title), app.title, 'width=' + width + ', height= ' + height + ', top=' + top + ', left=' + left + ', status=no, scrollbars=no, resizable=no');
+                    }
+                  }),
+                  Button.component({
                     className: 'Button Button--rounded Share--twitter',
                     icon: 'twitter fa-lg',
 
