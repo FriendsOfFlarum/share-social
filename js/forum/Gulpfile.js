@@ -1,7 +1,9 @@
 var gulp = require('flarum-gulp');
 
 gulp({
-  modules: {
-    'vingle/share/social': 'src/**/*.js'
-  }
+    modules: {
+        'avatar4eg/share-social': [
+            'src/**/*.js'
+        ]
+    }
 });

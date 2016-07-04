@@ -1,8 +1,9 @@
 <?php 
-namespace Vingle\Share\Social;
+namespace Avatar4eg\ShareSocial;
 
 use Illuminate\Contracts\Events\Dispatcher;
 
 return function(Dispatcher $events) {
-    $events->subscribe(Listeners\AddClientAssets::class);
+    $events->subscribe(Listener\AddClientAssets::class);
+    $events->subscribe(Listener\AddHeadData::class);
 };

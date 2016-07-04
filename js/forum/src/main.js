@@ -1,24 +1,27 @@
-import { extend } from 'flarum/extend';
 import app from 'flarum/app';
 import DiscussionPage from 'flarum/components/DiscussionPage';
 import Button from 'flarum/components/Button';
-import ShareSocialModal from 'vingle/share/social/components/ShareSocialModal';
-import {truncate} from 'flarum/utils/string'
-import {getPlainContent} from 'flarum/utils/string'
+import { extend } from 'flarum/extend';
 
-app.initializers.add('vingle-share-social', function() {
+import ShareModal from 'avatar4eg/share-social/components/ShareModal';
+import addMetaTags from 'avatar4eg/share-social/addMetaTags';
+
+app.initializers.add('avatar4eg-share-social', function() {
+    addMetaTags();
+
     extend(DiscussionPage.prototype, 'sidebarItems', function(items) {
-        if(app.current.discussion.startPost()){
-            var post = app.current.discussion.startPost();
-            var description = truncate(getPlainContent(post.contentHtml()),150,0);
-             $('meta[name=description]').attr('content', description.toLowerCase());
-        }
         items.add('share-social',
             Button.component({
                 className: 'Button Button-icon Button--share',
                 icon: 'share-alt',
-                children: app.forum.attribute('vingle.share.social') ? app.forum.attribute('vingle.share.social') : 'Share',
-                onclick: () => app.modal.show(new ShareSocialModal())
-            }), 5);
+                children: app.translator.trans('avatar4eg-share-social.forum.share_button'),
+                onclick: function () {
+                    var post = null;
+                    if(app.current.discussion.posts().length !== 0) {
+                        post = app.current.discussion.posts()[0];
+                    }
+                    app.modal.show(new ShareModal({post}))
+                }
+            }), -1);
     });
 });
