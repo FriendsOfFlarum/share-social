@@ -16,11 +16,7 @@ app.initializers.add('avatar4eg-share-social', function() {
                 icon: 'share-alt',
                 children: app.translator.trans('avatar4eg-share-social.forum.share_button'),
                 onclick: function () {
-                    var post = null;
-                    if(app.current.discussion.posts().length !== 0) {
-                        post = app.current.discussion.posts()[0];
-                    }
-                    app.modal.show(new ShareModal({post}))
+                    app.modal.show(new ShareModal({post: app.current.discussion.startPost()}))
                 }
             }), -1);
     });

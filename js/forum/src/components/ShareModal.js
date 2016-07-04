@@ -27,7 +27,7 @@ export default class ShareModal extends Modal {
 
         var share_url = encodeURIComponent(app.forum.attribute('baseUrl')) + '/d/' + app.current.discussion.id();
         var share_title = encodeURIComponent(app.title);
-        var share_description = this.post !== null ? encodeURIComponent(truncate(getPlainContent(this.post.contentHtml()), 150, 0)) : '';
+        var share_description = this.post ? encodeURIComponent(truncate(getPlainContent(this.post.contentHtml()), 150, 0)) : '';
         const width = 1000;
         const height = 500;
         const top = $(window).height() / 2 - height / 2;

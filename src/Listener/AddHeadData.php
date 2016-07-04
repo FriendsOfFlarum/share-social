@@ -1,8 +1,9 @@
-<?php namespace Avatar4eg\ShareSocial\Listener;
+<?php
+namespace Avatar4eg\ShareSocial\Listener;
 
 use Flarum\Event\ConfigureClientView;
-use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Forum\UrlGenerator;
+use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class AddHeadData

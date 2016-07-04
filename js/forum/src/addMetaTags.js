@@ -17,14 +17,13 @@ export default function() {
             twitter_card = true;
         }
 
+        if (open_graph || twitter_card) {
+            var title = this.discussion.title();
+            var url = app.forum.attribute('baseUrl') + '/d/' + this.discussion.id();
+        }
         var description = '';
-        if (this.discussion.posts().length !== 0) {
-            if (open_graph || twitter_card) {
-                var title = this.discussion.title();
-                var url = app.forum.attribute('baseUrl') + '/d/' + this.discussion.id();
-            }
-
-            var post = this.discussion.posts()[0];
+        if (app.current.discussion.startPost()) {
+            var post = app.current.discussion.startPost();
             description = truncate(getPlainContent(post.contentHtml()), 150, 0);
         }
 

@@ -17,14 +17,13 @@ System.register('avatar4eg/share-social/addMetaTags', ['flarum/app', 'flarum/com
                 twitter_card = true;
             }
 
+            if (open_graph || twitter_card) {
+                var title = this.discussion.title();
+                var url = app.forum.attribute('baseUrl') + '/d/' + this.discussion.id();
+            }
             var description = '';
-            if (this.discussion.posts().length !== 0) {
-                if (open_graph || twitter_card) {
-                    var title = this.discussion.title();
-                    var url = app.forum.attribute('baseUrl') + '/d/' + this.discussion.id();
-                }
-
-                var post = this.discussion.posts()[0];
+            if (app.current.discussion.startPost()) {
+                var post = app.current.discussion.startPost();
                 description = truncate(getPlainContent(post.contentHtml()), 150, 0);
             }
 
@@ -145,7 +144,7 @@ System.register('avatar4eg/share-social/components/ShareModal', ['flarum/app', '
 
                         var share_url = encodeURIComponent(app.forum.attribute('baseUrl')) + '/d/' + app.current.discussion.id();
                         var share_title = encodeURIComponent(app.title);
-                        var share_description = this.post !== null ? encodeURIComponent(truncate(getPlainContent(this.post.contentHtml()), 150, 0)) : '';
+                        var share_description = this.post ? encodeURIComponent(truncate(getPlainContent(this.post.contentHtml()), 150, 0)) : '';
                         var width = 1000;
                         var height = 500;
                         var top = $(window).height() / 2 - height / 2;
@@ -256,11 +255,7 @@ System.register('avatar4eg/share-social/main', ['flarum/app', 'flarum/components
                         icon: 'share-alt',
                         children: app.translator.trans('avatar4eg-share-social.forum.share_button'),
                         onclick: function onclick() {
-                            var post = null;
-                            if (app.current.discussion.posts().length !== 0) {
-                                post = app.current.discussion.posts()[0];
-                            }
-                            app.modal.show(new ShareModal({ post: post }));
+                            app.modal.show(new ShareModal({ post: app.current.discussion.startPost() }));
                         }
                     }), -1);
                 });
