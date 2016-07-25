@@ -13,7 +13,7 @@ System.register('avatar4eg/share-social/addMetaTags', ['flarum/app', 'flarum/com
             if (app.forum.attribute('shareSocialOpenGraph') && app.forum.attribute('shareSocialOpenGraph') === '1') {
                 open_graph = true;
             }
-            if (app.forum.attribute('shareSocialOpenGraph') && app.forum.attribute('shareSocialOpenGraph') === '1') {
+            if (app.forum.attribute('shareSocialTwitterCard') && app.forum.attribute('shareSocialTwitterCard') === '1') {
                 twitter_card = true;
             }
 
@@ -22,9 +22,8 @@ System.register('avatar4eg/share-social/addMetaTags', ['flarum/app', 'flarum/com
                 var url = app.forum.attribute('baseUrl') + '/d/' + this.discussion.id();
             }
             var description = '';
-            if (app.current.discussion.startPost()) {
-                var post = app.current.discussion.startPost();
-                description = truncate(getPlainContent(post.contentHtml()), 150, 0);
+            if (this.discussion.startPost()) {
+                description = truncate(getPlainContent(this.discussion.startPost().contentHtml()), 150, 0);
             }
 
             $('meta[name=description]').attr('content', description);
@@ -51,15 +50,15 @@ System.register('avatar4eg/share-social/addMetaTags', ['flarum/app', 'flarum/com
                     if (app.forum.attribute('shareSocialOpenGraph') && app.forum.attribute('shareSocialOpenGraph') === '1') {
                         open_graph = true;
                     }
-                    if (app.forum.attribute('shareSocialOpenGraph') && app.forum.attribute('shareSocialOpenGraph') === '1') {
+                    if (app.forum.attribute('shareSocialTwitterCard') && app.forum.attribute('shareSocialTwitterCard') === '1') {
                         twitter_card = true;
                     }
 
-                    var description = app.forum.attribute('description');
                     if (open_graph || twitter_card) {
                         var title = app.forum.attribute('welcomeTitle');
                         var url = app.forum.attribute('baseUrl');
                     }
+                    var description = app.forum.attribute('description');
 
                     $('meta[name=description]').attr('content', description);
                     if (open_graph) {
@@ -124,8 +123,8 @@ System.register('avatar4eg/share-social/components/ShareModal', ['flarum/app', '
 
                         this.localePrefix = 'avatar4eg-share-social.forum';
 
-                        this.socialButtons = app.forum.attribute('shareSocialButtons') ? JSON.parse(app.forum.attribute('shareSocialButtons')) : [];
-                        this.post = this.props.post;
+                        this.socialButtons = this.props.socialButtons;
+                        this.discussion = this.props.discussion;
                     }
                 }, {
                     key: 'className',
@@ -142,9 +141,9 @@ System.register('avatar4eg/share-social/components/ShareModal', ['flarum/app', '
                     value: function content() {
                         var parent = this;
 
-                        var share_url = encodeURIComponent(app.forum.attribute('baseUrl')) + '/d/' + app.current.discussion.id();
+                        var share_url = encodeURIComponent(app.forum.attribute('baseUrl')) + '/d/' + this.discussion.id();
                         var share_title = encodeURIComponent(app.title);
-                        var share_description = this.post ? encodeURIComponent(truncate(getPlainContent(this.post.contentHtml()), 150, 0)) : '';
+                        var share_description = this.discussion.startPost() ? encodeURIComponent(truncate(getPlainContent(this.discussion.startPost().contentHtml()), 150, 0)) : '';
                         var width = 1000;
                         var height = 500;
                         var top = $(window).height() / 2 - height / 2;
@@ -250,14 +249,20 @@ System.register('avatar4eg/share-social/main', ['flarum/app', 'flarum/components
                 addMetaTags();
 
                 extend(DiscussionPage.prototype, 'sidebarItems', function (items) {
-                    items.add('share-social', Button.component({
-                        className: 'Button Button-icon Button--share',
-                        icon: 'share-alt',
-                        children: app.translator.trans('avatar4eg-share-social.forum.share_button'),
-                        onclick: function onclick() {
-                            app.modal.show(new ShareModal({ post: app.current.discussion.startPost() }));
-                        }
-                    }), -1);
+                    var socialButtons = app.forum.attribute('shareSocialButtons') ? JSON.parse(app.forum.attribute('shareSocialButtons')) : [];
+                    if (socialButtons.length > 0) {
+                        items.add('share-social', Button.component({
+                            className: 'Button Button-icon Button--share',
+                            icon: 'share-alt',
+                            children: app.translator.trans('avatar4eg-share-social.forum.share_button'),
+                            onclick: function onclick() {
+                                app.modal.show(new ShareModal({
+                                    'socialButtons': socialButtons,
+                                    'discussion': app.current.discussion
+                                }));
+                            }
+                        }), -1);
+                    }
                 });
             });
         }

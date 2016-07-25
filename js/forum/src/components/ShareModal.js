@@ -10,8 +10,8 @@ export default class ShareModal extends Modal {
 
         this.localePrefix = 'avatar4eg-share-social.forum';
 
-        this.socialButtons = app.forum.attribute('shareSocialButtons') ? JSON.parse(app.forum.attribute('shareSocialButtons')) : [];
-        this.post = this.props.post;
+        this.socialButtons = this.props.socialButtons;
+        this.discussion = this.props.discussion;
     }
 
     className() {
@@ -25,9 +25,9 @@ export default class ShareModal extends Modal {
     content() {
         var parent = this;
 
-        var share_url = encodeURIComponent(app.forum.attribute('baseUrl')) + '/d/' + app.current.discussion.id();
+        var share_url = encodeURIComponent(app.forum.attribute('baseUrl')) + '/d/' + this.discussion.id();
         var share_title = encodeURIComponent(app.title);
-        var share_description = this.post ? encodeURIComponent(truncate(getPlainContent(this.post.contentHtml()), 150, 0)) : '';
+        var share_description = this.discussion.startPost() ? encodeURIComponent(truncate(getPlainContent(this.discussion.startPost().contentHtml()), 150, 0)) : '';
         const width = 1000;
         const height = 500;
         const top = $(window).height() / 2 - height / 2;

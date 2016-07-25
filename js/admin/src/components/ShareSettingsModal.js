@@ -10,7 +10,6 @@ export default class ShareSettingsModal extends SettingsModal {
         this.settingsPrefix = 'avatar4eg.share-social';
         this.localePrefix = 'avatar4eg-share-social.admin.settings';
 
-        const settings = app.settings;
         this.checkboxesSocial = app.settings[this.addPrefix('settings', 'list')] ? JSON.parse(app.settings[this.addPrefix('settings', 'list')]) : [];
 
         this.checkboxesMetatags = [
@@ -19,8 +18,8 @@ export default class ShareSettingsModal extends SettingsModal {
         ];
 
         this.values = {};
-        this.checkboxesSocial.forEach(key => this.values[key] = m.prop(settings[this.addPrefix('settings', key)] === '1'));
-        this.checkboxesMetatags.forEach(key => this.values[key] = m.prop(settings[this.addPrefix('settings', key)] === '1'));
+        this.checkboxesSocial.forEach(key => this.values[key] = m.prop(app.settings[this.addPrefix('settings', key)] === '1'));
+        this.checkboxesMetatags.forEach(key => this.values[key] = m.prop(app.settings[this.addPrefix('settings', key)] === '1'));
     }
 
     className() {
@@ -71,14 +70,10 @@ export default class ShareSettingsModal extends SettingsModal {
         this.loading = true;
         app.alerts.dismiss(this.successAlert);
 
-        const settings = {};
+        this.checkboxesSocial.forEach(key => this.settings[this.addPrefix('settings', key)] = this.values[key]);
+        this.checkboxesMetatags.forEach(key => this.settings[this.addPrefix('settings', key)] = this.values[key]);
 
-        this.checkboxesSocial.forEach(key => settings[this.addPrefix('settings', key)] = this.values[key]());
-        this.checkboxesMetatags.forEach(key => settings[this.addPrefix('settings', key)] = this.values[key]());
-
-        console.log(settings);
-
-        saveSettings(settings).then(
+        saveSettings(this.dirty()).then(
             this.hide.bind(this),
             this.loaded.bind(this)
         );

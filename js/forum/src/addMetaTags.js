@@ -13,7 +13,7 @@ export default function() {
         if (app.forum.attribute('shareSocialOpenGraph') && app.forum.attribute('shareSocialOpenGraph') === '1') {
             open_graph = true;
         }
-        if (app.forum.attribute('shareSocialOpenGraph') && app.forum.attribute('shareSocialOpenGraph') === '1') {
+        if (app.forum.attribute('shareSocialTwitterCard') && app.forum.attribute('shareSocialTwitterCard') === '1') {
             twitter_card = true;
         }
 
@@ -22,9 +22,8 @@ export default function() {
             var url = app.forum.attribute('baseUrl') + '/d/' + this.discussion.id();
         }
         var description = '';
-        if (app.current.discussion.startPost()) {
-            var post = app.current.discussion.startPost();
-            description = truncate(getPlainContent(post.contentHtml()), 150, 0);
+        if (this.discussion.startPost()) {
+            description = truncate(getPlainContent(this.discussion.startPost().contentHtml()), 150, 0);
         }
 
         $('meta[name=description]').attr('content', description);
@@ -51,15 +50,15 @@ export default function() {
                 if (app.forum.attribute('shareSocialOpenGraph') && app.forum.attribute('shareSocialOpenGraph') === '1') {
                     open_graph = true;
                 }
-                if (app.forum.attribute('shareSocialOpenGraph') && app.forum.attribute('shareSocialOpenGraph') === '1') {
+                if (app.forum.attribute('shareSocialTwitterCard') && app.forum.attribute('shareSocialTwitterCard') === '1') {
                     twitter_card = true;
                 }
 
-                var description = app.forum.attribute('description');
                 if (open_graph || twitter_card) {
                     var title = app.forum.attribute('welcomeTitle');
                     var url = app.forum.attribute('baseUrl');
                 }
+                var description = app.forum.attribute('description');
 
                 $('meta[name=description]').attr('content', description);
                 if (open_graph) {

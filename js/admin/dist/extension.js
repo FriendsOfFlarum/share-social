@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('avatar4eg/share-social/components/ShareSocialSettingsModal', ['flarum/app', 'flarum/components/SettingsModal', 'flarum/components/Switch', 'flarum/utils/saveSettings'], function (_export, _context) {
+System.register('avatar4eg/share-social/components/ShareSettingsModal', ['flarum/app', 'flarum/components/SettingsModal', 'flarum/components/Switch', 'flarum/utils/saveSettings'], function (_export, _context) {
     "use strict";
 
-    var app, SettingsModal, Switch, saveSettings, ShareSocialSettingsModal;
+    var app, SettingsModal, Switch, saveSettings, ShareSettingsModal;
     return {
         setters: [function (_flarumApp) {
             app = _flarumApp.default;
@@ -15,35 +15,34 @@ System.register('avatar4eg/share-social/components/ShareSocialSettingsModal', ['
             saveSettings = _flarumUtilsSaveSettings.default;
         }],
         execute: function () {
-            ShareSocialSettingsModal = function (_SettingsModal) {
-                babelHelpers.inherits(ShareSocialSettingsModal, _SettingsModal);
+            ShareSettingsModal = function (_SettingsModal) {
+                babelHelpers.inherits(ShareSettingsModal, _SettingsModal);
 
-                function ShareSocialSettingsModal() {
-                    babelHelpers.classCallCheck(this, ShareSocialSettingsModal);
-                    return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(ShareSocialSettingsModal).apply(this, arguments));
+                function ShareSettingsModal() {
+                    babelHelpers.classCallCheck(this, ShareSettingsModal);
+                    return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(ShareSettingsModal).apply(this, arguments));
                 }
 
-                babelHelpers.createClass(ShareSocialSettingsModal, [{
+                babelHelpers.createClass(ShareSettingsModal, [{
                     key: 'init',
                     value: function init() {
                         var _this2 = this;
 
-                        babelHelpers.get(Object.getPrototypeOf(ShareSocialSettingsModal.prototype), 'init', this).call(this);
+                        babelHelpers.get(Object.getPrototypeOf(ShareSettingsModal.prototype), 'init', this).call(this);
 
                         this.settingsPrefix = 'avatar4eg.share-social';
                         this.localePrefix = 'avatar4eg-share-social.admin.settings';
 
-                        var settings = app.settings;
                         this.checkboxesSocial = app.settings[this.addPrefix('settings', 'list')] ? JSON.parse(app.settings[this.addPrefix('settings', 'list')]) : [];
 
                         this.checkboxesMetatags = ['open_graph', 'twitter_card'];
 
                         this.values = {};
                         this.checkboxesSocial.forEach(function (key) {
-                            return _this2.values[key] = m.prop(settings[_this2.addPrefix('settings', key)] === '1');
+                            return _this2.values[key] = m.prop(app.settings[_this2.addPrefix('settings', key)] === '1');
                         });
                         this.checkboxesMetatags.forEach(function (key) {
-                            return _this2.values[key] = m.prop(settings[_this2.addPrefix('settings', key)] === '1');
+                            return _this2.values[key] = m.prop(app.settings[_this2.addPrefix('settings', key)] === '1');
                         });
                     }
                 }, {
@@ -99,18 +98,14 @@ System.register('avatar4eg/share-social/components/ShareSocialSettingsModal', ['
                         this.loading = true;
                         app.alerts.dismiss(this.successAlert);
 
-                        var settings = {};
-
                         this.checkboxesSocial.forEach(function (key) {
-                            return settings[_this4.addPrefix('settings', key)] = _this4.values[key]();
+                            return _this4.settings[_this4.addPrefix('settings', key)] = _this4.values[key];
                         });
                         this.checkboxesMetatags.forEach(function (key) {
-                            return settings[_this4.addPrefix('settings', key)] = _this4.values[key]();
+                            return _this4.settings[_this4.addPrefix('settings', key)] = _this4.values[key];
                         });
 
-                        console.log(settings);
-
-                        saveSettings(settings).then(this.hide.bind(this), this.loaded.bind(this));
+                        saveSettings(this.dirty()).then(this.hide.bind(this), this.loaded.bind(this));
                     }
                 }, {
                     key: 'addPrefix',
@@ -125,32 +120,32 @@ System.register('avatar4eg/share-social/components/ShareSocialSettingsModal', ['
                         }
                     }
                 }]);
-                return ShareSocialSettingsModal;
+                return ShareSettingsModal;
             }(SettingsModal);
 
-            _export('default', ShareSocialSettingsModal);
+            _export('default', ShareSettingsModal);
         }
     };
 });;
 'use strict';
 
-System.register('avatar4eg/share-social/main', ['flarum/extend', 'flarum/app', 'avatar4eg/share-social/components/ShareSocialSettingsModal'], function (_export, _context) {
+System.register('avatar4eg/share-social/main', ['flarum/extend', 'flarum/app', 'avatar4eg/share-social/components/ShareSettingsModal'], function (_export, _context) {
     "use strict";
 
-    var extend, app, ShareSocialSettingsModal;
+    var extend, app, ShareSettingsModal;
     return {
         setters: [function (_flarumExtend) {
             extend = _flarumExtend.extend;
         }, function (_flarumApp) {
             app = _flarumApp.default;
-        }, function (_avatar4egShareSocialComponentsShareSocialSettingsModal) {
-            ShareSocialSettingsModal = _avatar4egShareSocialComponentsShareSocialSettingsModal.default;
+        }, function (_avatar4egShareSocialComponentsShareSettingsModal) {
+            ShareSettingsModal = _avatar4egShareSocialComponentsShareSettingsModal.default;
         }],
         execute: function () {
 
             app.initializers.add('avatar4eg-share-social', function (app) {
                 app.extensionSettings['avatar4eg-share-social'] = function () {
-                    return app.modal.show(new ShareSocialSettingsModal());
+                    return app.modal.show(new ShareSettingsModal());
                 };
             });
         }
