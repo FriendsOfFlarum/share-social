@@ -61,9 +61,9 @@ class AddHeadData
 
             $dataTitle = $dataUrl = $dataDescription = '';
             if ($this->openGraph || $this->twitterCard) {
-                $dataTitle = $this->settings->get('welcome_title');
+                $dataTitle = htmlspecialchars($this->settings->get('welcome_title'), ENT_QUOTES|ENT_HTML5|ENT_DISALLOWED|ENT_SUBSTITUTE, 'UTF-8');
                 $dataUrl = $this->urlGenerator->toBase();
-                $dataDescription = $this->settings->get('forum_description');
+                $dataDescription = htmlspecialchars($this->settings->get('forum_description'), ENT_QUOTES|ENT_HTML5|ENT_DISALLOWED|ENT_SUBSTITUTE, 'UTF-8');
             }
 
             if ($this->openGraph) {
@@ -87,12 +87,13 @@ class AddHeadData
         if ($this->clientView && $event->isController(ShowDiscussionController::class)) {
             $dataTitle = $dataUrl = $dataDescription = '';
             if ($this->openGraph || $this->twitterCard) {
-                $dataTitle = $event->data->title;
+                $dataTitle = htmlspecialchars($event->data->title, ENT_QUOTES|ENT_HTML5|ENT_DISALLOWED|ENT_SUBSTITUTE, 'UTF-8');
                 $dataUrl = $this->urlGenerator->toRoute('discussion', ['id' => $event->data->id]);
             }
             if ($event->data->startPost) {
                 $dataDescription = strip_tags($event->data->startPost->content);
                 $dataDescription = strlen($dataDescription) > 150 ? substr($dataDescription, 0, 150) . '...' : $dataDescription;
+                $dataDescription = htmlspecialchars($dataDescription, ENT_QUOTES|ENT_HTML5|ENT_DISALLOWED|ENT_SUBSTITUTE, 'UTF-8');
             }
 
             //$this->clientView->addHeadString('<meta name="description" content="' . $dataDescription . '"/>', 'description');
