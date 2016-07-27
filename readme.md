@@ -5,9 +5,9 @@ Originally made by [BinhQuang](https://discuss.flarum.org/u/BinhQuang) ([Github]
 
 ### Screenshots
 
-![Imgur](http://imgur.com/xhQQfP6) ![Imgur](http://imgur.com/KjEw1rC)
-![Imgur](http://imgur.com/TTOBoyz) ![Imgur](http://imgur.com/vVwp7JT)
-![Imgur](http://imgur.com/4W88O1Z)
+![Imgur](https://i.imgur.com/xhQQfP6.png) ![Imgur](https://i.imgur.com/KjEw1rC.png)
+![Imgur](https://i.imgur.com/TTOBoyz.png) ![Imgur](https://i.imgur.com/vVwp7JT.png)
+![Imgur](https://i.imgur.com/4W88O1Z.png)
 
 ### goals
 
@@ -31,5 +31,5 @@ On discussion page in sidebar there is a new "Share" button which opens modal wi
 ### links
 
 - [on github](https://github.com/avatar4eg/flarum-ext-share-social)
-- [on packagist](http://packagist.com/packages/avatar4eg/flarum-ext-share-social)
+- [on packagist](https://packagist.com/packages/avatar4eg/flarum-ext-share-social)
 - [issues](https://github.com/avatar4eg/flarum-ext-share-social/issues)
