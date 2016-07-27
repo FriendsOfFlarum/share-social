@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('avatar4eg/share-social/components/ShareSettingsModal', ['flarum/app', 'flarum/components/SettingsModal', 'flarum/components/Switch', 'flarum/utils/saveSettings'], function (_export, _context) {
+System.register('avatar4eg/share-social/components/ShareSettingsModal', ['flarum/app', 'flarum/components/SettingsModal', 'flarum/components/Switch'], function (_export, _context) {
     "use strict";
 
-    var app, SettingsModal, Switch, saveSettings, ShareSettingsModal;
+    var app, SettingsModal, Switch, ShareSettingsModal;
     return {
         setters: [function (_flarumApp) {
             app = _flarumApp.default;
@@ -11,8 +11,6 @@ System.register('avatar4eg/share-social/components/ShareSettingsModal', ['flarum
             SettingsModal = _flarumComponentsSettingsModal.default;
         }, function (_flarumComponentsSwitch) {
             Switch = _flarumComponentsSwitch.default;
-        }, function (_flarumUtilsSaveSettings) {
-            saveSettings = _flarumUtilsSaveSettings.default;
         }],
         execute: function () {
             ShareSettingsModal = function (_SettingsModal) {
@@ -34,15 +32,13 @@ System.register('avatar4eg/share-social/components/ShareSettingsModal', ['flarum
                         this.localePrefix = 'avatar4eg-share-social.admin.settings';
 
                         this.checkboxesSocial = app.settings[this.addPrefix('settings', 'list')] ? JSON.parse(app.settings[this.addPrefix('settings', 'list')]) : [];
-
                         this.checkboxesMetatags = ['open_graph', 'twitter_card'];
 
-                        this.values = {};
                         this.checkboxesSocial.forEach(function (key) {
-                            return _this2.values[key] = m.prop(app.settings[_this2.addPrefix('settings', key)] === '1');
+                            return _this2.settings[_this2.addPrefix('settings', key)] = m.prop(app.settings[_this2.addPrefix('settings', key)] === '1');
                         });
                         this.checkboxesMetatags.forEach(function (key) {
-                            return _this2.values[key] = m.prop(app.settings[_this2.addPrefix('settings', key)] === '1');
+                            return _this2.settings[_this2.addPrefix('settings', key)] = m.prop(app.settings[_this2.addPrefix('settings', key)] === '1');
                         });
                     }
                 }, {
@@ -62,50 +58,38 @@ System.register('avatar4eg/share-social/components/ShareSettingsModal', ['flarum
 
                         return [this.checkboxesSocial.length !== 0 ? m('div', { className: 'Form-group' }, [m('label', {}, app.translator.trans(parent.addPrefix('locale', 'socials_label'))), this.checkboxesSocial.map(function (key) {
                             return Switch.component({
-                                state: parent.values[key]() || false,
+                                state: parent.settings[parent.addPrefix('settings', key)]() || false,
                                 children: app.translator.trans(parent.addPrefix('locale', key + '_label')),
-                                onchange: parent.values[key]
+                                onchange: parent.settings[parent.addPrefix('settings', key)]
                             });
                         })]) : '', m('div', { className: 'Form-group' }, [m('label', {}, app.translator.trans(parent.addPrefix('locale', 'metatags_label'))), this.checkboxesMetatags.map(function (key) {
                             return Switch.component({
-                                state: parent.values[key]() || false,
+                                state: parent.settings[parent.addPrefix('settings', key)]() || false,
                                 children: app.translator.trans(parent.addPrefix('locale', key + '_label')),
-                                onchange: parent.values[key]
+                                onchange: parent.settings[parent.addPrefix('settings', key)]
                             });
                         })])];
                     }
                 }, {
-                    key: 'changed',
-                    value: function changed() {
+                    key: 'dirty',
+                    value: function dirty() {
                         var _this3 = this;
 
-                        var fieldsCheck = this.checkboxesSocial.some(function (key) {
-                            return _this3.values[key]() !== (app.settings[_this3.addPrefix('settings', key)] == '1');
-                        });
-                        var checkboxesCheck = this.checkboxesMetatags.some(function (key) {
-                            return _this3.values[key]() !== (app.settings[_this3.addPrefix('settings', key)] == '1');
-                        });
-                        return fieldsCheck || checkboxesCheck;
-                    }
-                }, {
-                    key: 'onsubmit',
-                    value: function onsubmit(e) {
-                        var _this4 = this;
+                        var dirty = {};
 
-                        e.preventDefault();
-                        if (this.loading) return;
+                        Object.keys(this.settings).forEach(function (key) {
+                            var value = _this3.settings[key]();
 
-                        this.loading = true;
-                        app.alerts.dismiss(this.successAlert);
+                            if (typeof value === 'boolean') {
+                                value = value ? '1' : '0';
+                            }
 
-                        this.checkboxesSocial.forEach(function (key) {
-                            return _this4.settings[_this4.addPrefix('settings', key)] = _this4.values[key];
-                        });
-                        this.checkboxesMetatags.forEach(function (key) {
-                            return _this4.settings[_this4.addPrefix('settings', key)] = _this4.values[key];
+                            if (value !== app.settings[key]) {
+                                dirty[key] = value;
+                            }
                         });
 
-                        saveSettings(this.dirty()).then(this.hide.bind(this), this.loaded.bind(this));
+                        return dirty;
                     }
                 }, {
                     key: 'addPrefix',
