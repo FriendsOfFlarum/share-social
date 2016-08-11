@@ -17,6 +17,9 @@ class AddClientAssets
         $events->listen(ConfigureLocales::class, [$this, 'addLocales']);
     }
 
+    /**
+     * @param ConfigureClientView $event
+     */
     public function addAssets(ConfigureClientView $event)
     {
         if($event->isForum()) {
@@ -35,6 +38,9 @@ class AddClientAssets
         }
     }
 
+    /**
+     * @param ConfigureLocales $event
+     */
     public function addLocales(ConfigureLocales $event)
     {
         foreach (new DirectoryIterator(__DIR__ .'/../../locale') as $file) {

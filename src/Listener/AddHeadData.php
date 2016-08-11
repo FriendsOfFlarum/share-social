@@ -41,12 +41,18 @@ class AddHeadData
         $this->urlGenerator = $urlGenerator;
     }
 
+    /**
+     * @param Dispatcher $events
+     */
     public function subscribe(Dispatcher $events)
     {
         $events->listen(ConfigureClientView::class, [$this, 'addMetaTags']);
         $events->listen(PrepareApiData::class, [$this, 'addDiscussionMetaTags']);
     }
-    
+
+    /**
+     * @param ConfigureClientView $event
+     */
     public function addMetaTags(ConfigureClientView $event)
     {
         if ($event->isForum()) {
@@ -63,7 +69,7 @@ class AddHeadData
             if ($this->openGraph || $this->twitterCard) {
                 $dataTitle = htmlspecialchars($this->settings->get('welcome_title'), ENT_QUOTES|ENT_HTML5|ENT_DISALLOWED|ENT_SUBSTITUTE, 'UTF-8');
                 $dataUrl = $this->urlGenerator->toBase();
-                $dataDescription = htmlspecialchars($this->settings->get('forum_description'), ENT_QUOTES|ENT_HTML5|ENT_DISALLOWED|ENT_SUBSTITUTE, 'UTF-8');
+                $dataDescription = $this->plainText($this->settings->get('forum_description'), 150);
             }
 
             if ($this->openGraph) {
@@ -82,6 +88,9 @@ class AddHeadData
         }
     }
 
+    /**
+     * @param PrepareApiData $event
+     */
     public function addDiscussionMetaTags(PrepareApiData $event)
     {
         if ($this->clientView && $event->isController(ShowDiscussionController::class)) {
@@ -91,9 +100,7 @@ class AddHeadData
                 $dataUrl = $this->urlGenerator->toRoute('discussion', ['id' => $event->data->id]);
             }
             if ($event->data->startPost) {
-                $dataDescription = strip_tags($event->data->startPost->content);
-                $dataDescription = strlen($dataDescription) > 150 ? substr($dataDescription, 0, 150) . '...' : $dataDescription;
-                $dataDescription = htmlspecialchars($dataDescription, ENT_QUOTES|ENT_HTML5|ENT_DISALLOWED|ENT_SUBSTITUTE, 'UTF-8');
+                $dataDescription = $this->plainText($event->data->startPost->content, 150);
             }
 
             //$this->clientView->addHeadString('<meta name="description" content="' . $dataDescription . '"/>', 'description');
@@ -108,5 +115,22 @@ class AddHeadData
                 $this->clientView->addHeadString('<meta property="twitter:description" content="' . $dataDescription . '"/>', 'twitter_description');
             }
         }
+    }
+
+    /**
+     * @param string $text
+     * @param int|null $length
+     * @return string
+     */
+    protected function plainText($text, $length = null)
+    {
+        $text = strip_tags($text);
+        $text = preg_replace('/\s+/', ' ', $text);
+        $text = htmlspecialchars($text, ENT_QUOTES|ENT_HTML5|ENT_DISALLOWED|ENT_SUBSTITUTE, 'UTF-8');
+        if ($length !== null) {
+            $text = strlen($text) > $length ? substr($text, 0, $length) . '...' : $text;
+        }
+
+        return $text;
     }
 }
