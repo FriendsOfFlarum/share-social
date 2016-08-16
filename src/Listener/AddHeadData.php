@@ -128,7 +128,7 @@ class AddHeadData
         $text = preg_replace('/\s+/', ' ', $text);
         $text = htmlspecialchars($text, ENT_QUOTES|ENT_HTML5|ENT_DISALLOWED|ENT_SUBSTITUTE, 'UTF-8');
         if ($length !== null) {
-            $text = strlen($text) > $length ? substr($text, 0, $length) . '...' : $text;
+            $text = mb_strlen($text, 'UTF-8') > $length ? mb_substr($text, 0, $length, 'UTF-8') . '...' : $text;
         }
 
         return $text;
