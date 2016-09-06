@@ -1,8 +1,9 @@
 {
   "name": "avatar4eg/flarum-ext-share-social",
   "description": "Include share social button.",
-  "keywords": ["share", "facebook", "twitter", "google", "google plus", "social"],
   "type": "flarum-extension",
+  "keywords": ["share", "facebook", "twitter", "google", "google plus", "social"],
+  "license": "MIT",
   "authors": [
     {
       "name": "Binh Duong",

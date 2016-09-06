@@ -23,7 +23,7 @@ System.register('avatar4eg/share-social/addMetaTags', ['flarum/app', 'flarum/com
             }
             var description = '';
             if (this.discussion.startPost()) {
-                description = truncate(getPlainContent(this.discussion.startPost().contentHtml()), 150, 0);
+                description = truncate(getPlainContent(this.discussion.startPost().contentHtml()), 150, 0).replace(/\s+/, ' ').trim();
             }
 
             $('meta[name=description]').attr('content', description);
@@ -113,13 +113,13 @@ System.register('avatar4eg/share-social/components/ShareModal', ['flarum/app', '
 
                 function ShareModal() {
                     babelHelpers.classCallCheck(this, ShareModal);
-                    return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(ShareModal).apply(this, arguments));
+                    return babelHelpers.possibleConstructorReturn(this, (ShareModal.__proto__ || Object.getPrototypeOf(ShareModal)).apply(this, arguments));
                 }
 
                 babelHelpers.createClass(ShareModal, [{
                     key: 'init',
                     value: function init() {
-                        babelHelpers.get(Object.getPrototypeOf(ShareModal.prototype), 'init', this).call(this);
+                        babelHelpers.get(ShareModal.prototype.__proto__ || Object.getPrototypeOf(ShareModal.prototype), 'init', this).call(this);
 
                         this.localePrefix = 'avatar4eg-share-social.forum';
 

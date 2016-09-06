@@ -23,7 +23,7 @@ export default function() {
         }
         var description = '';
         if (this.discussion.startPost()) {
-            description = truncate(getPlainContent(this.discussion.startPost().contentHtml()), 150, 0);
+            description = truncate(getPlainContent(this.discussion.startPost().contentHtml()), 150, 0).replace(/\s+/, ' ').trim();
         }
 
         $('meta[name=description]').attr('content', description);

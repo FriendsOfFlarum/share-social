@@ -126,6 +126,7 @@ class AddHeadData
     {
         $text = strip_tags($text);
         $text = preg_replace('/\s+/', ' ', $text);
+        $text = trim($text);
         $text = htmlspecialchars($text, ENT_QUOTES|ENT_HTML5|ENT_DISALLOWED|ENT_SUBSTITUTE, 'UTF-8');
         if ($length !== null) {
             $text = mb_strlen($text, 'UTF-8') > $length ? mb_substr($text, 0, $length, 'UTF-8') . '...' : $text;
