@@ -12,6 +12,6 @@ return [
     },
 
     'down' => function (ConnectionInterface $db) {
-        $db->table('settings')->delete('avatar4eg.share-social.list');
+        $db->table('settings')->where('key', 'avatar4eg.share-social.list')->delete();
     }
 ];

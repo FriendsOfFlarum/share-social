@@ -32,6 +32,7 @@ export default class ShareModal extends Modal {
         const height = 500;
         const top = $(window).height() / 2 - height / 2;
         const left = $(window).width() / 2 - width / 2;
+        const window_params = 'width=' + width + ', height= ' + height + ', top=' + top + ', left=' + left + ', status=no, scrollbars=no, resizable=no';
 
         return [
             m('div', {className: 'Modal-body ShareSocialModal'}, [
@@ -47,7 +48,7 @@ export default class ShareModal extends Modal {
                                                 icon: 'facebook fa-lg fa-fw',
                                                 children: app.translator.trans(parent.addPrefix(key + '_button')),
                                                 onclick: () => {
-                                                    window.open('//facebook.com/sharer/sharer.php?u=' + share_url, app.title, 'width=' + width + ', height= ' + height + ', top=' + top + ', left=' + left + ', status=no, scrollbars=no, resizable=no');
+                                                    window.open('//facebook.com/sharer/sharer.php?u=' + share_url, app.title, window_params);
                                                 }
                                             })
                                         );
@@ -58,7 +59,7 @@ export default class ShareModal extends Modal {
                                                 icon: 'vk fa-lg fa-fw',
                                                 children: app.translator.trans(parent.addPrefix(key + '_button')),
                                                 onclick: function onclick() {
-                                                    window.open('//vk.com/share.php?url=' + share_url + '&title=' + share_title + '&description=' + share_description, app.title, 'width=' + width + ', height= ' + height + ', top=' + top + ', left=' + left + ', status=no, scrollbars=no, resizable=no');
+                                                    window.open('//vk.com/share.php?url=' + share_url + '&title=' + share_title + '&description=' + share_description, app.title, window_params);
                                                 }
                                             })
                                         );
@@ -69,7 +70,7 @@ export default class ShareModal extends Modal {
                                                 icon: 'twitter fa-lg fa-fw',
                                                 children: app.translator.trans(parent.addPrefix(key + '_button')),
                                                 onclick: () => {
-                                                    window.open('//twitter.com/share?url=' + share_url + '&text=' + share_title, app.title, 'width=' + width + ', height= ' + height + ', top=' + top + ', left=' + left + ', status=no, scrollbars=no, resizable=no');
+                                                    window.open('//twitter.com/share?url=' + share_url + '&text=' + share_title, app.title, window_params);
                                                 }
                                             })
                                         );
@@ -80,7 +81,7 @@ export default class ShareModal extends Modal {
                                                 icon: 'google-plus fa-lg fa-fw',
                                                 children: app.translator.trans(parent.addPrefix(key + '_button')),
                                                 onclick: () => {
-                                                    window.open('//plus.google.com/share?url=' + share_url, app.title, 'width=' + width + ', height= ' + height + ', top=' + top + ', left=' + left + ', status=no, scrollbars=no, resizable=no');
+                                                    window.open('//plus.google.com/share?url=' + share_url, app.title, window_params);
                                                 }
                                             })
                                         );
@@ -91,7 +92,7 @@ export default class ShareModal extends Modal {
                                                 icon: 'odnoklassniki fa-lg fa-fw',
                                                 children: app.translator.trans(parent.addPrefix(key + '_button')),
                                                 onclick: () => {
-                                                    window.open('//connect.ok.ru/offer?url=' + share_url, app.title, 'width=' + width + ', height= ' + height + ', top=' + top + ', left=' + left + ', status=no, scrollbars=no, resizable=no');
+                                                    window.open('//connect.ok.ru/offer?url=' + share_url, app.title, window_params);
                                                 }
                                             })
                                         );
@@ -102,7 +103,18 @@ export default class ShareModal extends Modal {
                                                 icon: 'at fa-lg fa-fw',
                                                 children: app.translator.trans(parent.addPrefix(key + '_button')),
                                                 onclick: () => {
-                                                    window.open('//connect.mail.ru/share?url=' + share_url + '&title=' + share_title + '&description=' + share_description, app.title, 'width=' + width + ', height= ' + height + ', top=' + top + ', left=' + left + ', status=no, scrollbars=no, resizable=no');
+                                                    window.open('//connect.mail.ru/share?url=' + share_url + '&title=' + share_title + '&description=' + share_description, app.title, window_params);
+                                                }
+                                            })
+                                        );
+                                    case 'linkedin':
+                                        return m('li', {className: 'ShareItem'},
+                                            Button.component({
+                                                className: 'Button Button--rounded Share--' + key,
+                                                icon: 'linkedin fa-lg fa-fw',
+                                                children: app.translator.trans(parent.addPrefix(key + '_button')),
+                                                onclick: () => {
+                                                    window.open('//linkedin.com/shareArticle?mini=true&url=' + share_url + '&title=' + share_title + '&summary=' + share_description, app.title, window_params);
                                                 }
                                             })
                                         );

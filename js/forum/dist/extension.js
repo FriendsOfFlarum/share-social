@@ -148,6 +148,7 @@ System.register('avatar4eg/share-social/components/ShareModal', ['flarum/app', '
                         var height = 500;
                         var top = $(window).height() / 2 - height / 2;
                         var left = $(window).width() / 2 - width / 2;
+                        var window_params = 'width=' + width + ', height= ' + height + ', top=' + top + ', left=' + left + ', status=no, scrollbars=no, resizable=no';
 
                         return [m('div', { className: 'Modal-body ShareSocialModal' }, [m('div', { className: 'Form Form--centered' }, [m('div', { className: 'Form-group' }, m('ul', { className: 'ShareList' }, [this.socialButtons.map(function (key) {
                             switch (key) {
@@ -157,7 +158,7 @@ System.register('avatar4eg/share-social/components/ShareModal', ['flarum/app', '
                                         icon: 'facebook fa-lg fa-fw',
                                         children: app.translator.trans(parent.addPrefix(key + '_button')),
                                         onclick: function onclick() {
-                                            window.open('//facebook.com/sharer/sharer.php?u=' + share_url, app.title, 'width=' + width + ', height= ' + height + ', top=' + top + ', left=' + left + ', status=no, scrollbars=no, resizable=no');
+                                            window.open('//facebook.com/sharer/sharer.php?u=' + share_url, app.title, window_params);
                                         }
                                     }));
                                 case 'vkontakte':
@@ -166,7 +167,7 @@ System.register('avatar4eg/share-social/components/ShareModal', ['flarum/app', '
                                         icon: 'vk fa-lg fa-fw',
                                         children: app.translator.trans(parent.addPrefix(key + '_button')),
                                         onclick: function onclick() {
-                                            window.open('//vk.com/share.php?url=' + share_url + '&title=' + share_title + '&description=' + share_description, app.title, 'width=' + width + ', height= ' + height + ', top=' + top + ', left=' + left + ', status=no, scrollbars=no, resizable=no');
+                                            window.open('//vk.com/share.php?url=' + share_url + '&title=' + share_title + '&description=' + share_description, app.title, window_params);
                                         }
                                     }));
                                 case 'twitter':
@@ -175,7 +176,7 @@ System.register('avatar4eg/share-social/components/ShareModal', ['flarum/app', '
                                         icon: 'twitter fa-lg fa-fw',
                                         children: app.translator.trans(parent.addPrefix(key + '_button')),
                                         onclick: function onclick() {
-                                            window.open('//twitter.com/share?url=' + share_url + '&text=' + share_title, app.title, 'width=' + width + ', height= ' + height + ', top=' + top + ', left=' + left + ', status=no, scrollbars=no, resizable=no');
+                                            window.open('//twitter.com/share?url=' + share_url + '&text=' + share_title, app.title, window_params);
                                         }
                                     }));
                                 case 'google_plus':
@@ -184,7 +185,7 @@ System.register('avatar4eg/share-social/components/ShareModal', ['flarum/app', '
                                         icon: 'google-plus fa-lg fa-fw',
                                         children: app.translator.trans(parent.addPrefix(key + '_button')),
                                         onclick: function onclick() {
-                                            window.open('//plus.google.com/share?url=' + share_url, app.title, 'width=' + width + ', height= ' + height + ', top=' + top + ', left=' + left + ', status=no, scrollbars=no, resizable=no');
+                                            window.open('//plus.google.com/share?url=' + share_url, app.title, window_params);
                                         }
                                     }));
                                 case 'odnoklassniki':
@@ -193,7 +194,7 @@ System.register('avatar4eg/share-social/components/ShareModal', ['flarum/app', '
                                         icon: 'odnoklassniki fa-lg fa-fw',
                                         children: app.translator.trans(parent.addPrefix(key + '_button')),
                                         onclick: function onclick() {
-                                            window.open('//connect.ok.ru/offer?url=' + share_url, app.title, 'width=' + width + ', height= ' + height + ', top=' + top + ', left=' + left + ', status=no, scrollbars=no, resizable=no');
+                                            window.open('//connect.ok.ru/offer?url=' + share_url, app.title, window_params);
                                         }
                                     }));
                                 case 'my_mail':
@@ -202,7 +203,16 @@ System.register('avatar4eg/share-social/components/ShareModal', ['flarum/app', '
                                         icon: 'at fa-lg fa-fw',
                                         children: app.translator.trans(parent.addPrefix(key + '_button')),
                                         onclick: function onclick() {
-                                            window.open('//connect.mail.ru/share?url=' + share_url + '&title=' + share_title + '&description=' + share_description, app.title, 'width=' + width + ', height= ' + height + ', top=' + top + ', left=' + left + ', status=no, scrollbars=no, resizable=no');
+                                            window.open('//connect.mail.ru/share?url=' + share_url + '&title=' + share_title + '&description=' + share_description, app.title, window_params);
+                                        }
+                                    }));
+                                case 'linkedin':
+                                    return m('li', { className: 'ShareItem' }, Button.component({
+                                        className: 'Button Button--rounded Share--' + key,
+                                        icon: 'linkedin fa-lg fa-fw',
+                                        children: app.translator.trans(parent.addPrefix(key + '_button')),
+                                        onclick: function onclick() {
+                                            window.open('//linkedin.com/shareArticle?mini=true&url=' + share_url + '&title=' + share_title + '&summary=' + share_description, app.title, window_params);
                                         }
                                     }));
                                 default:
