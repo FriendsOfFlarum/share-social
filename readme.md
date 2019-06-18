@@ -7,7 +7,7 @@ A [Flarum](http://flarum.org) extension. Add a button to share discussions throu
 <details> 
   <summary>Screenshots </summary>
   
-  <img src="https://i.imgur.com/1YzVRza.jpg" alt="share modal" width="300" />
+  <img src="https://i.imgur.com/k11HnSI.png" alt="share modal" width="300" />
   <img src="https://i.imgur.com/EBLh4zG.jpg" alt="settings" width="300" />
 </details>
 
