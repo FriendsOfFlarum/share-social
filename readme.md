@@ -1,42 +1,34 @@
-# Share-social by Avatar4eg
+# Share Social by FriendsOfFlarum
 
-A [Flarum](http://flarum.org) extension that adds share (to some popular social networks) buttons and \<head> meta tags (Open Graph and Twitter Card) to make links to your forum look better.
-Originally made by [BinhQuang](https://discuss.flarum.org/u/BinhQuang) ([Github](https://github.com/tutula1/vingle-share-social)).
+![License](https://img.shields.io/badge/license-MIT-blue.svg) [![Latest Stable Version](https://img.shields.io/packagist/v/fof/share-social.svg)](https://packagist.org/packages/fof/share-social)
 
-### Screenshots
+A [Flarum](http://flarum.org) extension. Add a button to share discussions through social networks. Original by @Avatar4eg.
 
-Settings:  
-![Imgur](https://i.imgur.com/KjEw1rC.png)  
-Discussion button:  
-![Imgur](https://i.imgur.com/TTOBoyz.png)  
-Share modal:  
-![Imgur](https://i.imgur.com/xhQQfP6.png)  
-New meta tags:  
-![Imgur](https://i.imgur.com/vVwp7JT.png)  
-Example of link view in VK.com:  
-![Imgur](https://i.imgur.com/4W88O1Z.png)  
-
-### Goals
-
-- Allow easy share discussions to popular social networks.
-- Make shared links look better.
+<details> 
+  <summary>Screenshots </summary>
+  
+  <img src="https://i.imgur.com/1YzVRza.jpg" alt="share modal" width="300" />
+  <img src="https://i.imgur.com/EBLh4zG.jpg" alt="settings" width="300" />
+</details>
 
 ### Installation
 
-```bash
-composer require avatar4eg/flarum-ext-share-social
+Use [Bazaar](https://discuss.flarum.org/d/5151-flagrow-bazaar-the-extension-marketplace) or install manually with composer:
+
+```sh
+composer require fof/share-social
 ```
 
-### Configuration
+### Updating
 
-- Open settings modal of the extension in your admin panel to configure share buttons list and meta tags.
-
-## End-user usage
-
-On discussion page in sidebar there is a new "Share" button which opens modal with list of enabled social buttons. Each button opens a new window with selected social network share dialog.
+```sh
+composer update fof/share-social
+```
 
 ### Links
 
-- [on github](https://github.com/avatar4eg/flarum-ext-share-social)
-- [on packagist](https://packagist.com/packages/avatar4eg/flarum-ext-share-social)
-- [issues](https://github.com/avatar4eg/flarum-ext-share-social/issues)
+- [Packagist](https://packagist.org/packages/fof/share-social)
+- [GitHub](https://githbu.com/FriendsOfFlarum/share-social)
+- [Avatar4eg's Share Social](https://github.com/Avatar4eg/flarum-ext-share-social)
+
+An extension by [FriendsOfFlarum](https://github.com/FriendsOfFlarum).

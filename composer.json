@@ -1,35 +1,41 @@
 {
-  "name": "avatar4eg/flarum-ext-share-social",
-  "description": "Include share social button.",
+  "name": "fof/share-social",
+  "description": "Add a button to share discussions through social networks",
+  "keywords": [
+    "flarum"
+  ],
   "type": "flarum-extension",
-  "keywords": ["share", "facebook", "twitter", "google", "google plus", "social"],
   "license": "MIT",
+  "require": {
+    "flarum/core": "^0.1.0-beta.8",
+    "fof/extend": ">=0.2.0"
+  },
+  "replace": {
+    "avatar4eg/flarum-ext-share-social": "*"
+  },
   "authors": [
     {
-      "name": "Binh Duong",
-      "email": "binh.duong@vingle.net"
-    },
-    {
-      "name": "Nikolai Morozov",
-      "email": "avanmorozov@gmail.com"
+      "name": "David Sevilla Martín",
+      "email": "david.s@redevs.org",
+      "role": "Developer"
     }
   ],
-  "require": {
-    "flarum/core": "^0.1.0-beta.5"
-  },
   "autoload": {
     "psr-4": {
-      "Avatar4eg\\ShareSocial\\": "src/"
+      "FoF\\ShareSocial\\": "src/"
     }
   },
   "extra": {
     "flarum-extension": {
-      "title": "Share Social",
+      "title": "FoF Share Social",
       "icon": {
-        "name": "share-alt",
-        "backgroundColor": "#EE8208",
+        "name": "fas fa-share-alt",
+        "backgroundColor": "#e74c3c",
         "color": "#fff"
       }
+    },
+    "flagrow": {
+      "discuss": ""
     }
   }
 }
