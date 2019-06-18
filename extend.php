@@ -21,8 +21,8 @@ return [
     (new Native\Frontend('admin'))
         ->js(__DIR__.'/js/dist/admin.js')
         ->css(__DIR__.'/resources/less/admin.less'),
-    new Native\Locales(__DIR__ . '/resources/locale'),
+    new Native\Locales(__DIR__.'/resources/locale'),
     (new Extend\ExtensionSettings())
         ->setPrefix('fof-share-social.networks.')
-        ->addKeys(['facebook', 'twitter', 'linkedin', 'reddit', 'vkontakte', 'odnoklassniki', 'my_mail'])
+        ->addKeys(['facebook', 'twitter', 'linkedin', 'reddit', 'vkontakte', 'odnoklassniki', 'my_mail']),
 ];

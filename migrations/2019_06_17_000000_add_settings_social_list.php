@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of fof/share-social.
+ *
+ * Copyright (c) 2019 FriendsOfFlarum.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Illuminate\Database\Schema\Builder;
 
 return [
@@ -13,7 +22,9 @@ return [
                 foreach ($json as $network) {
                     $network = strtolower($network);
 
-                    if ($network == 'google_plus') continue;
+                    if ($network == 'google_plus') {
+                        continue;
+                    }
 
                     $settings->set("fof-share-social.networks.$network", true);
                 }
@@ -24,5 +35,5 @@ return [
     },
     'down' => function () {
         // do nothing
-    }
+    },
 ];
