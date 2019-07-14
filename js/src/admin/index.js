@@ -1,7 +1,7 @@
 import SettingsModal from '@fof/components/admin/settings/SettingsModal';
 import BooleanItem from '@fof/components/admin/settings/items/BooleanItem';
 
-const networks = [['facebook', 'twitter', 'linkedin', 'reddit'], ['vkontakte', 'odnoklassniki', 'my_mail'], ['qq']];
+const networks = [['facebook', 'twitter', 'linkedin', 'reddit'], ['vkontakte', 'odnoklassniki', 'my_mail'], ['qq', 'qzone']];
 
 app.initializers.add('fof/share-social', () => {
     app.extensionSettings['fof-share-social'] = () =>
