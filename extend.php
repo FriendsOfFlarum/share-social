@@ -24,5 +24,5 @@ return [
     new Native\Locales(__DIR__.'/resources/locale'),
     (new Extend\ExtensionSettings())
         ->setPrefix('fof-share-social.networks.')
-        ->addKeys(['facebook', 'twitter', 'linkedin', 'reddit', 'vkontakte', 'odnoklassniki', 'my_mail']),
+        ->addKeys(['facebook', 'twitter', 'linkedin', 'reddit', 'vkontakte', 'odnoklassniki', 'my_mail', 'qq']),
 ];
