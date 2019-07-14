@@ -14,11 +14,13 @@ const shareUrls = {
     vkontakte: '//vk.com/share.php?url={url}&title={title}&description={description}',
     odnoklassniki: '//connect.ok.ru/offer?url={url}',
     my_mail: '//connect.mail.ru/share?url={url}&title={title}&description={description}',
+    qq: '//connect.qq.com/widget/shareqq/iframe_index.html?url={url}&title={title}'
 };
 
 const shareIcons = {
     vkontakte: 'fab fa-vk',
     my_mail: 'fas fa-at',
+    qq: 'fab fa-qq'
 };
 
 export default class ShareModal extends Modal {
