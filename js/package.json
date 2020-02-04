@@ -4,9 +4,9 @@
   "private": true,
   "dependencies": {
     "flarum-webpack-config": "^0.1.0-beta.10",
-    "pupa": "^2.0.0",
-    "webpack": "^4.26.0",
-    "webpack-cli": "^3.0.7"
+    "pupa": "^2.0.1",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
   },
   "scripts": {
     "dev": "webpack --mode development --watch",
@@ -14,7 +14,6 @@
     "lint": "prettier --single-quote --trailing-comma es5 --print-width 150 --tab-width 4 --write 'src/**/*'"
   },
   "devDependencies": {
-    "@fof/components": "github:friendsofflarum/components",
-    "prettier": "^1.18.2"
+    "prettier": "^1.19.1"
   }
 }

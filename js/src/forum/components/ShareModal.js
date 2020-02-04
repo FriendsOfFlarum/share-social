@@ -15,14 +15,14 @@ const shareUrls = {
     odnoklassniki: '//connect.ok.ru/offer?url={url}',
     my_mail: '//connect.mail.ru/share?url={url}&title={title}&description={description}',
     qq: '//connect.qq.com/widget/shareqq/iframe_index.html?url={url}&title={title}',
-    qzone: '//sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url={url}&summary={description}&title={title}'
+    qzone: '//sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url={url}&summary={description}&title={title}',
 };
 
 const shareIcons = {
     vkontakte: 'fab fa-vk',
     my_mail: 'fas fa-at',
     qq: 'fab fa-qq',
-    qzone: 'fas fa-star'
+    qzone: 'fas fa-star',
 };
 
 export default class ShareModal extends Modal {

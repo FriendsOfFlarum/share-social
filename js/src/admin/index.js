@@ -1,5 +1,8 @@
-import SettingsModal from '@fof/components/admin/settings/SettingsModal';
-import BooleanItem from '@fof/components/admin/settings/items/BooleanItem';
+import { settings } from '@fof-components';
+const {
+  SettingsModal,
+  items: { BooleanItem },
+} = settings;
 
 const networks = [['facebook', 'twitter', 'linkedin', 'reddit'], ['vkontakte', 'odnoklassniki', 'my_mail'], ['qq', 'qzone']];
 

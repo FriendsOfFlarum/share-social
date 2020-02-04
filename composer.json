@@ -8,6 +8,7 @@
   "license": "MIT",
   "require": {
     "flarum/core": "^0.1.0-beta.8",
+    "fof/components": ">=0.1.1",
     "fof/extend": ">=0.2.0"
   },
   "replace": {
@@ -16,7 +17,7 @@
   "authors": [
     {
       "name": "David Sevilla Martín",
-      "email": "david.s@redevs.org",
+      "email": "me+fof@datitisev.me",
       "role": "Developer"
     }
   ],
