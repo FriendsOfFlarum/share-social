@@ -4,7 +4,7 @@ const {
   items: { BooleanItem },
 } = settings;
 
-const networks = [['facebook', 'twitter', 'linkedin', 'reddit'], ['vkontakte', 'odnoklassniki', 'my_mail'], ['qq', 'qzone']];
+const networks = [['facebook', 'twitter', 'linkedin', 'reddit', 'whatsapp'], ['vkontakte', 'odnoklassniki', 'my_mail'], ['qq', 'qzone']];
 
 app.initializers.add('fof/share-social', () => {
     app.extensionSettings['fof-share-social'] = () =>
