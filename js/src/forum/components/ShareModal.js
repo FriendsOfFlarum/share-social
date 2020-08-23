@@ -11,6 +11,7 @@ const shareUrls = {
     linkedin: '//linkedin.com/shareArticle?mini=true&url={url}&title={title}&summary={description}',
     reddit: '//www.reddit.com/submit?url={url}&title={title}',
     whatsapp: '//wa.me/?text={title}%20{url}',
+    telegram: '//telegram.me/share/url?url={url}&text={title}',
 
     vkontakte: '//vk.com/share.php?url={url}&title={title}&description={description}',
     odnoklassniki: '//connect.ok.ru/offer?url={url}',
