@@ -1,10 +1,15 @@
 import { settings } from '@fof-components';
 const {
-  SettingsModal,
-  items: { BooleanItem },
+    SettingsModal,
+    items: { BooleanItem },
 } = settings;
 
-const networks = [['facebook', 'twitter', 'linkedin', 'reddit'], ['vkontakte', 'odnoklassniki', 'my_mail'], ['qq', 'qzone']];
+const networks = [
+    ['facebook', 'twitter', 'linkedin', 'reddit'],
+    ['whatsapp', 'telegram'],
+    ['vkontakte', 'odnoklassniki', 'my_mail'],
+    ['qq', 'qzone'],
+];
 
 app.initializers.add('fof/share-social', () => {
     app.extensionSettings['fof-share-social'] = () =>
