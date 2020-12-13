@@ -1,6 +1,4 @@
-const config = require('flarum-webpack-config')({
-  useExtensions: ['fof-components'],
-});
+const config = require('flarum-webpack-config')();
 
 delete config.module.rules[0].exclude;
 

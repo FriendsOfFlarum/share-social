@@ -12,12 +12,9 @@
 namespace FoF\ShareSocial;
 
 use Flarum\Extend as Native;
-use FoF\Components\Extend\AddFofComponents;
 use FoF\Extend\Extend;
 
 return [
-    new AddFofComponents(),
-
     (new Native\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js')
         ->css(__DIR__.'/resources/less/forum.less'),

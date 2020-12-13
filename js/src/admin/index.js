@@ -1,8 +1,4 @@
-import { settings } from '@fof-components';
-const {
-    SettingsModal,
-    items: { BooleanItem },
-} = settings;
+import app from 'flarum/app';
 
 const networks = [
     ['facebook', 'twitter', 'linkedin', 'reddit'],
@@ -12,21 +8,15 @@ const networks = [
 ];
 
 app.initializers.add('fof/share-social', () => {
-    app.extensionSettings['fof-share-social'] = () =>
-        app.modal.show(
-            SettingsModal, {
-                title: app.translator.trans('fof-share-social.admin.settings.title'),
-                className: 'FofShareSocialSettingsModal',
-                size: 'small',
-                items: s=> [
-                    ...networks.map(networks =>
-                        networks.map(network => (
-                            <BooleanItem setting={s} name={`fof-share-social.networks.${network}`}>
-                                {app.translator.trans(`fof-share-social.lib.networks.${network}`)}
-                            </BooleanItem>
-                        ))
-                    ),
-                ],
-            }
-        );
+
+  let set = app.extensionData.for('fof-share-social');
+
+  networks.map(networks =>
+    networks.map(network => (
+      set.registerSetting({
+        label: app.translator.trans(`fof-share-social.lib.networks.${network}`),
+        setting: `fof-share-social.networks.${network}`,
+        type: 'boolean'
+      })
+    )))
 });
