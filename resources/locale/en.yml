@@ -6,10 +6,6 @@ fof-share-social:
     modal:
       title: Share
 
-  admin:
-    settings:
-      title: FriendsOfFlarum Share Social
-
   lib:
     networks:
       facebook: Facebook

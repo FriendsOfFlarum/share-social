@@ -62,11 +62,14 @@ export default class ShareModal extends Modal {
                 <div className="Form Form--centered">
                     <div className="Form-group">
                         {this.networks.map(network =>
-                            Button.component({
-                                className: `Button Button--rounded Button--block Share--${network}`,
-                                icon: `${shareIcons[network] || `fab fa-${network}`} fa-lg fa-fw`,
-                                onclick: () => window.open(pupa(shareUrls[network], data), app.title, windowParams),
-                            }, app.translator.trans(`fof-share-social.lib.networks.${network}`))
+                            Button.component(
+                                {
+                                    className: `Button Button--rounded Button--block Share--${network}`,
+                                    icon: `${shareIcons[network] || `fab fa-${network}`} fa-lg fa-fw`,
+                                    onclick: () => window.open(pupa(shareUrls[network], data), app.title, windowParams),
+                                },
+                                app.translator.trans(`fof-share-social.lib.networks.${network}`)
+                            )
                         )}
                     </div>
                 </div>

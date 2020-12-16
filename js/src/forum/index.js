@@ -14,17 +14,18 @@ app.initializers.add('fof/share-social', () => {
         if (networks.length) {
             items.add(
                 'share-social',
-                Button.component({
-                    className: 'Button Button-icon Button--share',
-                    icon: 'fas fa-share-alt',
-                    onclick: () =>
-                        app.modal.show(
-                            ShareModal, {
+                Button.component(
+                    {
+                        className: 'Button Button-icon Button--share',
+                        icon: 'fas fa-share-alt',
+                        onclick: () =>
+                            app.modal.show(ShareModal, {
                                 networks,
                                 discussion: this.discussion,
-                            }
-                        ),
-                }, app.translator.trans('fof-share-social.forum.discussion.share_button')),
+                            }),
+                    },
+                    app.translator.trans('fof-share-social.forum.discussion.share_button')
+                ),
                 -1
             );
         }
