@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of fof/share-social.
+ *
+ * Copyright (c) FriendsOfFlarum.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace FoF\ShareSocial;
 
 use Flarum\Api\Serializer\ForumSerializer;
@@ -23,7 +32,7 @@ class ForumAttributes
         $networks = [];
 
         foreach (self::KEYS as $key) {
-            if ($this->settings->get(self::PREFIX . $key)) {
+            if ($this->settings->get(self::PREFIX.$key)) {
                 $networks[] = $key;
             }
         }
