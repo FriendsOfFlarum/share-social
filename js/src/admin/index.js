@@ -10,8 +10,8 @@ const networks = [
 app.initializers.add('fof/share-social', () => {
     let set = app.extensionData.for('fof-share-social');
 
-    networks.forEach(networks =>
-        networks.forEach(network =>
+    networks.forEach((networks) =>
+        networks.forEach((network) =>
             set.registerSetting({
                 label: app.translator.trans(`fof-share-social.lib.networks.${network}`),
                 setting: `fof-share-social.networks.${network}`,

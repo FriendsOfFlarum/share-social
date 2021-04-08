@@ -11,18 +11,17 @@
 
 namespace FoF\ShareSocial;
 
-use Flarum\Extend as Native;
-use FoF\Extend\Extend;
+use Flarum\Api\Serializer\ForumSerializer;
+use Flarum\Extend;
 
 return [
-    (new Native\Frontend('forum'))
+    (new Extend\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js')
         ->css(__DIR__.'/resources/less/forum.less'),
-    (new Native\Frontend('admin'))
+    (new Extend\Frontend('admin'))
         ->js(__DIR__.'/js/dist/admin.js')
         ->css(__DIR__.'/resources/less/admin.less'),
-    new Native\Locales(__DIR__.'/resources/locale'),
-    (new Extend\ExtensionSettings())
-        ->setPrefix('fof-share-social.networks.')
-        ->addKeys(['facebook', 'twitter', 'linkedin', 'reddit', 'whatsapp', 'telegram', 'vkontakte', 'odnoklassniki', 'my_mail', 'qq', 'qzone']),
+    new Extend\Locales(__DIR__.'/resources/locale'),
+    (new Extend\ApiSerializer(ForumSerializer::class))
+        ->attributes(ForumAttributes::class),
 ];

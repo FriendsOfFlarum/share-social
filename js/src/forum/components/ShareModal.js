@@ -1,7 +1,6 @@
-import Modal from 'flarum/components/Modal';
-import Button from 'flarum/components/Button';
-import { truncate } from 'flarum/utils/string';
-import { getPlainContent } from 'flarum/utils/string';
+import Modal from 'flarum/common/components/Modal';
+import Button from 'flarum/common/components/Button';
+import { truncate, getPlainContent } from 'flarum/common/utils/string';
 
 import pupa from 'pupa';
 
@@ -61,7 +60,7 @@ export default class ShareModal extends Modal {
             <div className="Modal-body">
                 <div className="Form Form--centered">
                     <div className="Form-group">
-                        {this.networks.map(network =>
+                        {this.networks.map((network) =>
                             Button.component(
                                 {
                                     className: `Button Button--rounded Button--block Share--${network}`,

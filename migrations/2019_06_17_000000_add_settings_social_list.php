@@ -13,7 +13,7 @@ use Illuminate\Database\Schema\Builder;
 
 return [
     'up' => function (Builder $schema) {
-        $settings = app('flarum.settings');
+        $settings = resolve('flarum.settings');
 
         if ($value = $settings->get($key = 'avatar4eg.share-social.list')) {
             $json = json_decode($value);

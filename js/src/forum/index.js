@@ -1,15 +1,12 @@
-import { extend } from 'flarum/extend';
-import DiscussionPage from 'flarum/components/DiscussionPage';
-import Button from 'flarum/components/Button';
+import { extend } from 'flarum/common/extend';
+import DiscussionPage from 'flarum/forum/components/DiscussionPage';
+import Button from 'flarum/common/components/Button';
 
 import ShareModal from './components/ShareModal';
 
 app.initializers.add('fof/share-social', () => {
-    extend(DiscussionPage.prototype, 'sidebarItems', function(items) {
-        const prefix = 'fof-share-social.networks.';
-        const networks = Object.keys(app.data)
-            .filter(k => k.startsWith('fof-share-social.networks.') && Number(app.data[k]))
-            .map(k => k.replace(prefix, ''));
+    extend(DiscussionPage.prototype, 'sidebarItems', function (items) {
+        const networks = app.forum.attribute('fof-share-social.networks');
 
         if (networks.length) {
             items.add(
