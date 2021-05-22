@@ -13,12 +13,12 @@ app.initializers.add('fof/share-social', () => {
     set.registerSetting({
         label: app.translator.trans('fof-share-social.admin.settings.canonical-urls'),
         setting: 'fof-share-social.canonical-urls',
-        type: 'boolean'
-    })
+        type: 'boolean',
+    });
 
-    set.registerSetting(function() {
-        return <hr/>
-    })
+    set.registerSetting(function () {
+        return <hr />;
+    });
 
     networks.forEach((networks) =>
         networks.forEach((network) =>
