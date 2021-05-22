@@ -16,6 +16,10 @@ app.initializers.add('fof/share-social', () => {
         type: 'boolean'
     })
 
+    set.registerSetting(function() {
+        return <hr/>
+    })
+
     networks.forEach((networks) =>
         networks.forEach((network) =>
             set.registerSetting({
