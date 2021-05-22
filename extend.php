@@ -24,4 +24,6 @@ return [
     new Extend\Locales(__DIR__.'/resources/locale'),
     (new Extend\ApiSerializer(ForumSerializer::class))
         ->attributes(ForumAttributes::class),
+    (new Extend\Settings())
+        ->serializeToForum('fof-share-social.canonical-urls', 'fof-share-social.canonical-urls', 'boolVal'),
 ];

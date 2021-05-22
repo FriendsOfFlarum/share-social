@@ -1,4 +1,7 @@
 fof-share-social:
+  admin:
+    settings:
+      canonical-urls: Use canonical URLs for sharing
   forum:
     discussion:
       share_button: Share
