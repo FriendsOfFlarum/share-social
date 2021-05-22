@@ -43,8 +43,7 @@ export default class ShareModal extends Modal {
     }
 
     content() {
-        const discussionRoute = app.forum.attribute('fof-share-social.canonical-urls') ? app.route.discussion(this.discussion) : app.route('discussion', { id: this.discussion.id() });
-        const url = encodeURIComponent(app.forum.attribute('baseUrl') + discussionRoute);
+        const url = encodeURIComponent(this.discussion.shareUrl());
         const title = encodeURIComponent(app.title);
         const description = this.discussion.firstPost()
             ? encodeURIComponent(truncate(getPlainContent(this.discussion.firstPost().contentHtml()), 150, 0))
