@@ -26,7 +26,7 @@ return [
     (new Extend\Frontend('admin'))
         ->js(__DIR__.'/js/dist/admin.js')
         ->css(__DIR__.'/resources/less/admin.less'),
-    
+
     new Extend\Locales(__DIR__.'/resources/locale'),
 
     (new Extend\ApiSerializer(ForumSerializer::class))
@@ -39,6 +39,6 @@ return [
             $canonical = (bool) resolve(SettingsRepositoryInterface::class)->get('fof-share-social.canonical-urls');
 
             return $url->to('forum')->route('discussion', [
-                'id' => $discussion->id . ($canonical ? (trim($discussion->slug) ? '-' . $discussion->slug : '') : '')]);
-        })
+                'id' => $discussion->id.($canonical ? (trim($discussion->slug) ? '-'.$discussion->slug : '') : ''), ]);
+        }),
 ];
