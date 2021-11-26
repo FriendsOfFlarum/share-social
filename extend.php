@@ -13,10 +13,7 @@ namespace FoF\ShareSocial;
 
 use Flarum\Api\Serializer\DiscussionSerializer;
 use Flarum\Api\Serializer\ForumSerializer;
-use Flarum\Discussion\Discussion;
 use Flarum\Extend;
-use Flarum\Http\UrlGenerator;
-use Flarum\Settings\SettingsRepositoryInterface;
 
 return [
     (new Extend\Frontend('forum'))
@@ -33,12 +30,5 @@ return [
         ->attributes(ForumAttributes::class),
 
     (new Extend\ApiSerializer(DiscussionSerializer::class))
-        ->attribute('shareUrl', function (DiscussionSerializer $serializer, Discussion $discussion) {
-            /** @var UrlGenerator */
-            $url = resolve(UrlGenerator::class);
-            $canonical = (bool) resolve(SettingsRepositoryInterface::class)->get('fof-share-social.canonical-urls');
-
-            return $url->to('forum')->route('discussion', [
-                'id' => $discussion->id.($canonical ? (trim($discussion->slug) ? '-'.$discussion->slug : '') : ''), ]);
-        }),
+        ->attributes(DiscussionAttributes::class),
 ];
