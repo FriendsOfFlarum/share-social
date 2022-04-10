@@ -10,7 +10,7 @@ const shareUrls = {
   twitter: '//twitter.com/share?url={url}&text={title}',
   linkedin: '//linkedin.com/shareArticle?mini=true&url={url}&title={title}&summary={description}',
   reddit: '//www.reddit.com/submit?url={url}&title={title}',
-  whatsapp: '//wa.me/?text={title}%20{url}',
+  whatsapp: '//api.whatsapp.com/send/?phone&text={title}%20{url}',
   telegram: '//telegram.me/share/url?url={url}&text={title}',
 
   vkontakte: '//vk.com/share.php?url={url}&title={title}&description={description}',
