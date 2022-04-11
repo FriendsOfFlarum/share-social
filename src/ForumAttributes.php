@@ -20,7 +20,7 @@ class ForumAttributes
 
     const PREFIX = 'fof-share-social.networks.';
 
-    const KEYS = ['facebook', 'twitter', 'linkedin', 'reddit', 'whatsapp', 'telegram', 'vkontakte', 'odnoklassniki', 'my_mail', 'qq', 'qzone'];
+    const KEYS = ['facebook', 'twitter', 'linkedin', 'reddit', 'whatsapp', 'telegram', 'vkontakte', 'odnoklassniki', 'my_mail', 'qq', 'qzone', 'native'];
 
     public function __construct(SettingsRepositoryInterface $settings)
     {

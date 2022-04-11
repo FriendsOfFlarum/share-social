@@ -5,7 +5,9 @@ import { truncate, getPlainContent } from 'flarum/common/utils/string';
 
 import pupa from 'pupa';
 
-const shareUrls = {
+const navigatorData = ({ title, description, url }) => ({ title, text: description, url });
+
+const share = {
   facebook: '//facebook.com/sharer/sharer.php?u={url}',
   twitter: '//twitter.com/share?url={url}&text={title}',
   linkedin: '//linkedin.com/shareArticle?mini=true&url={url}&title={title}&summary={description}',
@@ -18,6 +20,8 @@ const shareUrls = {
   my_mail: '//connect.mail.ru/share?url={url}&title={title}&description={description}',
   qq: '//connect.qq.com/widget/shareqq/iframe_index.html?url={url}&title={title}',
   qzone: '//sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url={url}&summary={description}&title={title}',
+
+  native: (data) => navigator.share(navigatorData(data)),
 };
 
 const shareIcons = {
@@ -25,6 +29,7 @@ const shareIcons = {
   my_mail: 'fas fa-at',
   qq: 'fab fa-qq',
   qzone: 'fas fa-star',
+  native: 'fas fa-share-square',
 };
 
 export default class ShareModal extends Modal {
@@ -44,12 +49,34 @@ export default class ShareModal extends Modal {
   }
 
   content() {
-    const url = encodeURIComponent(this.discussion.shareUrl());
-    const title = encodeURIComponent(app.title);
-    const description = this.discussion.firstPost()
-      ? encodeURIComponent(truncate(getPlainContent(this.discussion.firstPost().contentHtml()), 150, 0))
-      : '';
-    const data = { url, title, description };
+    return (
+      <div className="Modal-body">
+        <div className="Form Form--centered">
+          <div className="Form-group">
+            {this.networks
+              .filter((name) => name !== 'native' || navigator.canShare?.(navigatorData(this.data())))
+              .map((network) => (
+                <Button
+                  className={`Button Button--rounded Button--block Share--${network}`}
+                  icon={`${shareIcons[network] || `fab fa-${network}`} fa-lg fa-fw`}
+                  onclick={this.onclick.bind(this, network)}
+                >
+                  {app.translator.trans(`fof-share-social.lib.networks.${network}`)}
+                </Button>
+              ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  onclick(network) {
+    const data = this.data();
+    const action = share[network];
+
+    if (typeof action === 'function') {
+      return action(data);
+    }
 
     const width = 1000;
     const height = 500;
@@ -57,23 +84,18 @@ export default class ShareModal extends Modal {
     const left = $(window).width() / 2 - width / 2;
     const windowParams = `width=${width}, height= ${height}, top=${top}, left=${left}, status=no, scrollbars=no, resizable=no`;
 
-    return (
-      <div className="Modal-body">
-        <div className="Form Form--centered">
-          <div className="Form-group">
-            {this.networks.map((network) =>
-              Button.component(
-                {
-                  className: `Button Button--rounded Button--block Share--${network}`,
-                  icon: `${shareIcons[network] || `fab fa-${network}`} fa-lg fa-fw`,
-                  onclick: () => window.open(pupa(shareUrls[network], data), app.title, windowParams),
-                },
-                app.translator.trans(`fof-share-social.lib.networks.${network}`)
-              )
-            )}
-          </div>
-        </div>
-      </div>
-    );
+    for (const dataKey in data) {
+      data[dataKey] = encodeURIComponent(data[dataKey]);
+    }
+
+    window.open(pupa(action, data), app.title, windowParams);
+  }
+
+  data() {
+    const url = this.discussion.shareUrl();
+    const title = app.title;
+    const description = (this.discussion.firstPost() && truncate(getPlainContent(this.discussion.firstPost()?.contentHtml()), 150, 0)) || '';
+
+    return { url, title, description };
   }
 }

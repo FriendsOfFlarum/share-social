@@ -5,6 +5,7 @@ const networks = [
   ['whatsapp', 'telegram'],
   ['vkontakte', 'odnoklassniki', 'my_mail'],
   ['qq', 'qzone'],
+  ['native'],
 ];
 
 app.initializers.add('fof/share-social', () => {
