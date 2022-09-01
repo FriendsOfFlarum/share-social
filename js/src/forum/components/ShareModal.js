@@ -54,12 +54,12 @@ export default class ShareModal extends Modal {
       <div className="Modal-body">
         <div className="Form Form--centered">
           <div className="Form-group ShareUrl">
-            <input
-              className="FormControl"
-              type="text"
-              value={this.discussion.shareUrl()}
-            />
-            <Button className={"Button Button--primary Button--copy"} onclick={this.copy.bind(this)}>
+            <input className="FormControl" type="text" value={this.discussion.shareUrl()} />
+            <Button
+              className={'Button Button--primary'}
+              aria-label={app.translator.trans('fof-share-social.forum.modal.copy_button')}
+              onclick={this.copy.bind(this)}
+            >
               {icon('fas fa-copy fa-check')}
             </Button>
           </div>
@@ -111,18 +111,18 @@ export default class ShareModal extends Modal {
   }
 
   copy() {
-    const copyText = document.querySelector(".ShareUrl input");
+    const copyText = document.querySelector('.ShareUrl input');
     copyText.select();
     copyText.setSelectionRange(0, 99999);
-    document.execCommand("copy");
+    document.execCommand('copy');
     this.toggleCopyIcon();
   }
 
   toggleCopyIcon() {
-    const copyButton = document.querySelector(".Button--copy i");
-    copyButton.classList.toggle("fa-copy");
+    const copyButton = document.querySelector('.ShareUrl button i');
+    copyButton.classList.toggle('fa-copy');
     setTimeout(() => {
-      copyButton.classList.toggle("fa-copy");
+      copyButton.classList.toggle('fa-copy');
     }, 3000);
   }
 }
