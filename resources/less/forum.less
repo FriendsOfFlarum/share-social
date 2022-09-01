@@ -5,8 +5,15 @@
 }
 
 .FofShareSocialModal .Modal-body {
+  .ShareUrl {
+    display: flex;
+    gap: 5px;
 
-  .Button {
+    .Button--copy {
+    }
+  }
+
+  .Button:not(.Button--copy) {
     width: 100%;
     border-radius: @border-radius;
     margin-top: 10px !important;
@@ -43,7 +50,7 @@
   .Share--qq {
     .Button--color(#fff, #12B8F6);
   }
-  
+
   .Share--qzone {
     .Button--color(#fff, #FFBB30);
   }
@@ -55,7 +62,7 @@
   .Share--telegram {
     .Button--color(#fff, #0088cc);
   }
-  
+
   .fa-lg {
     font-size: 1.33333333em;
     line-height: 0.75em;
