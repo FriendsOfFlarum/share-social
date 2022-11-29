@@ -26,7 +26,7 @@ composer update fof/share-social
 ### Links
 
 - [Packagist](https://packagist.org/packages/fof/share-social)
-- [GitHub](https://githbu.com/FriendsOfFlarum/share-social)
+- [GitHub](https://github.com/FriendsOfFlarum/share-social)
 - [Avatar4eg's Share Social](https://github.com/Avatar4eg/flarum-ext-share-social)
 
 An extension by [FriendsOfFlarum](https://github.com/FriendsOfFlarum).
