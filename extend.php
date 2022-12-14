@@ -26,6 +26,10 @@ return [
 
     new Extend\Locales(__DIR__.'/resources/locale'),
 
+    (new Extend\Settings())
+        ->default('fof-share-social.plain-copy', true)
+        ->serializeToForum('fof-share-social.plain-copy', 'fof-share-social.plain-copy'),
+
     (new Extend\ApiSerializer(ForumSerializer::class))
         ->attributes(ForumAttributes::class),
 

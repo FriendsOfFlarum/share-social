@@ -24,6 +24,11 @@ app.initializers.add('fof/share-social', () => {
       setting: 'fof-share-social.canonical-urls',
       type: 'boolean',
     })
+    .registerSetting({
+      label: app.translator.trans('fof-share-social.admin.settings.plain-copy'),
+      setting: 'fof-share-social.plain-copy',
+      type: 'boolean',
+    })
     .registerSetting(function () {
       return <hr />;
     });

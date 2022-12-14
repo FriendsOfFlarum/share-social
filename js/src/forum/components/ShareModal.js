@@ -5,6 +5,7 @@ import icon from 'flarum/common/helpers/icon';
 import { truncate, getPlainContent } from 'flarum/common/utils/string';
 
 import pupa from 'pupa';
+import ItemList from 'flarum/common/utils/ItemList';
 
 const navigatorData = ({ title, description, url }) => ({ title, text: description, url });
 
@@ -53,32 +54,50 @@ export default class ShareModal extends Modal {
     return (
       <div className="Modal-body">
         <div className="Form Form--centered">
-          <div className="Form-group ShareUrl">
-            <input className="FormControl" type="text" value={this.discussion.shareUrl()} />
-            <Button
-              className={'Button Button--primary'}
-              aria-label={app.translator.trans('fof-share-social.forum.modal.copy_button')}
-              onclick={this.copy.bind(this)}
-            >
-              {icon('fas fa-copy fa-check')}
-            </Button>
-          </div>
-          <div className="Form-group">
-            {this.networks
-              .filter((name) => name !== 'native' || navigator.canShare?.(navigatorData(this.data())))
-              .map((network) => (
-                <Button
-                  className={`Button Button--rounded Button--block Share--${network}`}
-                  icon={`${shareIcons[network] || `fab fa-${network}`} fa-lg fa-fw`}
-                  onclick={this.onclick.bind(this, network)}
-                >
-                  {app.translator.trans(`fof-share-social.lib.networks.${network}`)}
-                </Button>
-              ))}
-          </div>
+          <div className="Form-group">{this.shareItems().toArray()}</div>
         </div>
       </div>
     );
+  }
+
+  shareItems() {
+    const items = new ItemList();
+    const plainCopy = app.forum.attribute('fof-share-social.plain-copy');
+
+    {
+      this.networks
+        .filter((name) => name !== 'native' || navigator.canShare?.(navigatorData(this.data())))
+        .map((network) =>
+          items.add(
+            `network-${network}`,
+            <Button
+              className={`Button Button--rounded Button--block Share--${network}`}
+              icon={`${shareIcons[network] || `fab fa-${network}`} fa-lg fa-fw`}
+              onclick={this.onclick.bind(this, network)}
+            >
+              {app.translator.trans(`fof-share-social.lib.networks.${network}`)}
+            </Button>
+          )
+        );
+    }
+
+    if (plainCopy) {
+      items.add(
+        'plain-copy',
+        <div className="ShareUrl">
+          <input className="FormControl" type="text" value={this.discussion.shareUrl()} />
+          <Button
+            className={'Button Button--primary'}
+            aria-label={app.translator.trans('fof-share-social.forum.modal.copy_button')}
+            onclick={this.copy.bind(this)}
+          >
+            {icon('fas fa-copy fa-check')}
+          </Button>
+        </div>
+      );
+    }
+
+    return items;
   }
 
   onclick(network) {
