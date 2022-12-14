@@ -1,6 +1,7 @@
 import app from 'flarum/forum/app';
 import Modal from 'flarum/common/components/Modal';
 import Button from 'flarum/common/components/Button';
+import icon from 'flarum/common/helpers/icon';
 import { truncate, getPlainContent } from 'flarum/common/utils/string';
 
 import pupa from 'pupa';
@@ -52,6 +53,16 @@ export default class ShareModal extends Modal {
     return (
       <div className="Modal-body">
         <div className="Form Form--centered">
+          <div className="Form-group ShareUrl">
+            <input className="FormControl" type="text" value={this.discussion.shareUrl()} />
+            <Button
+              className={'Button Button--primary'}
+              aria-label={app.translator.trans('fof-share-social.forum.modal.copy_button')}
+              onclick={this.copy.bind(this)}
+            >
+              {icon('fas fa-copy fa-check')}
+            </Button>
+          </div>
           <div className="Form-group">
             {this.networks
               .filter((name) => name !== 'native' || navigator.canShare?.(navigatorData(this.data())))
@@ -97,5 +108,21 @@ export default class ShareModal extends Modal {
     const description = (this.discussion.firstPost() && truncate(getPlainContent(this.discussion.firstPost()?.contentHtml()), 150, 0)) || '';
 
     return { url, title, description };
+  }
+
+  copy() {
+    const copyText = document.querySelector('.ShareUrl input');
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand('copy');
+    this.toggleCopyIcon();
+  }
+
+  toggleCopyIcon() {
+    const copyButton = document.querySelector('.ShareUrl button i');
+    copyButton.classList.toggle('fa-copy');
+    setTimeout(() => {
+      copyButton.classList.toggle('fa-copy');
+    }, 3000);
   }
 }

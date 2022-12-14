@@ -13,23 +13,23 @@ app.initializers.add('fof/share-social', () => {
   extend(DiscussionPage.prototype, 'sidebarItems', function (items) {
     const networks = app.forum.attribute('fof-share-social.networks');
 
-    if (networks.length) {
-      items.add(
-        'share-social',
-        <Button
-          class="Button Button-icon Button--share"
-          icon="fas fa-share-alt"
-          onclick={() =>
-            app.modal.show(ShareModal, {
-              networks,
-              discussion: this.discussion,
-            })
-          }
-        >
-          {app.translator.trans('fof-share-social.forum.discussion.share_button')}
-        </Button>,
-        -1
-      );
-    }
+    if (!networks.length) return;
+
+    items.add(
+      'share-social',
+      <Button
+        class="Button Button-icon Button--share"
+        icon="fas fa-share-alt"
+        onclick={() =>
+          app.modal.show(ShareModal, {
+            networks,
+            discussion: this.discussion,
+          })
+        }
+      >
+        {app.translator.trans('fof-share-social.forum.discussion.share_button')}
+      </Button>,
+      -1
+    );
   });
 });
