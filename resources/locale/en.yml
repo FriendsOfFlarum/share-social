@@ -2,6 +2,7 @@ fof-share-social:
   admin:
     settings:
       canonical-urls: Use canonical URLs for sharing
+      plain-copy: Display plain URL copy
   forum:
     discussion:
       share_button: Share
