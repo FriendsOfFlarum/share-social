@@ -6,7 +6,7 @@ import icon from 'flarum/common/helpers/icon';
 import pupa from 'pupa';
 import ItemList from 'flarum/common/utils/ItemList';
 import { canNativeShare } from '../util/share';
-import { getNetworkButton } from '../util/networks';
+import {getNetworkButton, getNetworkButtons} from '../util/networks';
 
 export default class ShareModal extends Modal {
   oninit(vdom) {
@@ -35,14 +35,8 @@ export default class ShareModal extends Modal {
   }
 
   shareItems() {
-    const items = new ItemList();
+    const items = getNetworkButtons(this.discussion, true);
     const plainCopy = app.forum.attribute('fof-share-social.plain-copy');
-
-    {
-      this.networks
-        .filter((name) => name !== 'native' || canNativeShare(this.discussion))
-        .map((network) => items.add(`network-${network}`, getNetworkButton({ network, discussion: this.discussion, isRounded: true })));
-    }
 
     if (plainCopy) {
       items.add(
