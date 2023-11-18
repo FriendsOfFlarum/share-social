@@ -16,7 +16,51 @@
     border-radius: @border-radius;
     margin-top: 10px !important;
   }
+}
 
+.item-share-social .Dropdown {
+  &:not(.itemCount1) {
+    .SplitDropdown-button {
+      width: unset;
+    }
+  }
+
+  .Dropdown-menu {
+    .Button {
+      width: 100% !important;
+      color: var(--button-color);
+      background: var(--button-bg);
+
+      .icon {
+        margin-top: 4px;
+      }
+
+      &:hover,
+      &:focus,
+      &.focus {
+        background-color: var(--button-bg-hover);
+      }
+
+      &:active,
+      &.active,
+      .open > .Dropdown-toggle& {
+        background-color: var(--button-bg-active);
+      }
+    }
+
+    @media @tablet-up {
+      padding: 0;
+
+      .Button {
+        margin: 4px 4px;
+        border-radius: @border-radius;
+        width: ~"calc(100% - 8px)" !important;
+      }
+    }
+  }
+}
+
+.item-share-social, .FofShareSocialModal {
   .Share--facebook {
     .Button--color(#fff, #3B5998);
   }
