@@ -3,10 +3,7 @@ import Modal from 'flarum/common/components/Modal';
 import Button from 'flarum/common/components/Button';
 import icon from 'flarum/common/helpers/icon';
 
-import pupa from 'pupa';
-import ItemList from 'flarum/common/utils/ItemList';
-import { canNativeShare } from '../util/share';
-import {getNetworkButton, getNetworkButtons} from '../util/networks';
+import { getNetworkButtons } from '../util/networks';
 
 export default class ShareModal extends Modal {
   oninit(vdom) {
