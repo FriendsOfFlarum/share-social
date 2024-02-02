@@ -28,7 +28,8 @@ return [
 
     (new Extend\Settings())
         ->default('fof-share-social.plain-copy', true)
-        ->serializeToForum('fof-share-social.plain-copy', 'fof-share-social.plain-copy'),
+        ->serializeToForum('fof-share-social.plain-copy', 'fof-share-social.plain-copy')
+        ->serializeToForum('fof-share-social.default', 'fof-share-social.default-option'),
 
     (new Extend\ApiSerializer(ForumSerializer::class))
         ->attributes(ForumAttributes::class),
