@@ -18,9 +18,7 @@ class ForumAttributes
 {
     protected $settings;
 
-    const PREFIX = 'fof-share-social.networks.';
-
-    const KEYS = ['facebook', 'twitter', 'linkedin', 'reddit', 'whatsapp', 'telegram', 'vkontakte', 'odnoklassniki', 'my_mail', 'qq', 'qzone', 'native'];
+    const KEYS = ['Facebook', 'Twitter', 'LinkedIn', 'Reddit', 'Whatsapp', 'Telegram', 'vkontakte', 'odnoklassniki', 'my_mail', 'qq', 'qzone', 'native'];
 
     public function __construct(SettingsRepositoryInterface $settings)
     {
@@ -32,13 +30,11 @@ class ForumAttributes
         $networks = [];
 
         foreach (self::KEYS as $key) {
-            if ($this->settings->get(self::PREFIX.$key)) {
+            if ($this->settings->get(self::$key)) {
                 $networks[] = $key;
             }
         }
 
-        return [
-            'fof-share-social.networks' => $networks,
-        ];
+        return $networks;
     }
 }

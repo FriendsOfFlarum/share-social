@@ -26,7 +26,7 @@ return [
                         continue;
                     }
 
-                    $settings->set("fof-share-social.networks.$network", true);
+                    $settings->set("$network", true);
                 }
             }
 
