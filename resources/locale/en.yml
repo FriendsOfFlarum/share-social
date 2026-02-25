@@ -19,7 +19,7 @@ fof-share-social:
   lib:
     networks:
       facebook: Facebook
-      twitter: Twitter
+      twitter: X (formerly Twitter)
       linkedin: LinkedIn
       reddit: Reddit
       whatsapp: WhatsApp

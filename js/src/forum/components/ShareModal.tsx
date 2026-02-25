@@ -1,27 +1,36 @@
 import app from 'flarum/forum/app';
-import Modal from 'flarum/common/components/Modal';
+import Modal, { IInternalModalAttrs } from 'flarum/common/components/Modal';
 import Button from 'flarum/common/components/Button';
 import icon from 'flarum/common/helpers/icon';
+import ItemList from 'flarum/common/utils/ItemList';
+import Mithril from 'mithril';
 
 import { getNetworkButtons } from '../util/networks';
+import { ShareableDiscussion } from '../util/share';
 
-export default class ShareModal extends Modal {
-  oninit(vdom) {
-    super.oninit(vdom);
+export interface IShareModalAttrs extends IInternalModalAttrs {
+  networks: string[];
+  discussion: ShareableDiscussion;
+}
 
-    this.networks = this.attrs.networks;
+export default class ShareModal extends Modal<IShareModalAttrs> {
+  discussion!: ShareableDiscussion;
+
+  oninit(vnode: Mithril.Vnode<IShareModalAttrs, this>) {
+    super.oninit(vnode);
+
     this.discussion = this.attrs.discussion;
   }
 
-  className() {
+  className(): string {
     return 'FofShareSocialModal Modal--small';
   }
 
-  title() {
+  title(): Mithril.Children {
     return app.translator.trans('fof-share-social.forum.modal.title');
   }
 
-  content() {
+  content(): Mithril.Children {
     return (
       <div className="Modal-body">
         <div className="Form Form--centered">
@@ -31,7 +40,7 @@ export default class ShareModal extends Modal {
     );
   }
 
-  shareItems() {
+  shareItems(): ItemList<Mithril.Children> {
     const items = getNetworkButtons(this.discussion, true);
     const plainCopy = app.forum.attribute('fof-share-social.plain-copy');
 
@@ -54,20 +63,14 @@ export default class ShareModal extends Modal {
     return items;
   }
 
-  onclick(network) {
-    return share(network);
-  }
-
   copy() {
-    const copyText = document.querySelector('.ShareUrl input');
-    copyText.select();
-    copyText.setSelectionRange(0, 99999);
-    document.execCommand('copy');
-    this.toggleCopyIcon();
+    const url = this.discussion.shareUrl();
+    navigator.clipboard?.writeText(url).then(() => this.toggleCopyIcon());
   }
 
   toggleCopyIcon() {
     const copyButton = document.querySelector('.ShareUrl button i');
+    if (!copyButton) return;
     copyButton.classList.toggle('fa-copy');
     setTimeout(() => {
       copyButton.classList.toggle('fa-copy');

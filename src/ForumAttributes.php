@@ -16,6 +16,7 @@ use Flarum\Settings\SettingsRepositoryInterface;
 
 class ForumAttributes
 {
+    /** @var SettingsRepositoryInterface */
     protected $settings;
 
     const PREFIX = 'fof-share-social.networks.';

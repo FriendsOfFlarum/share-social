@@ -17,9 +17,8 @@ const networks = [
 ];
 
 app.initializers.add('fof/share-social', () => {
-  const set = app.extensionData.for('fof-share-social');
-
-  set
+  const set = app.extensionData
+    .for('fof-share-social')
     .registerSetting({
       label: app.translator.trans('fof-share-social.admin.settings.canonical-urls'),
       setting: 'fof-share-social.canonical-urls',
