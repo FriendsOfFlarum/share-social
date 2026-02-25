@@ -4,7 +4,6 @@ import DiscussionPage from 'flarum/forum/components/DiscussionPage';
 import Button from 'flarum/common/components/Button';
 import SplitDropdown from 'flarum/common/components/SplitDropdown';
 
-import ShareModal from './components/ShareModal';
 import { data, getNativeData, ShareableDiscussion } from './util/share';
 import { getNetworkButtons } from './util/networks';
 
@@ -51,7 +50,7 @@ app.initializers.add('fof/share-social', () => {
           class="Button Button-icon Button--share"
           icon="fas fa-share-alt"
           onclick={() =>
-            app.modal.show(ShareModal, {
+            app.modal.show(() => import('./components/ShareModal'), {
               networks,
               discussion,
             })
