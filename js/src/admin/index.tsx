@@ -1,5 +1,5 @@
 import app from 'flarum/admin/app';
-import type { SelectSettingComponentOptions } from 'flarum/admin/components/AdminPage';
+import type { SelectFieldComponentOptions } from 'flarum/common/components/FormGroup';
 
 const networks = [
   'facebook',
@@ -17,7 +17,7 @@ const networks = [
 ];
 
 app.initializers.add('fof/share-social', () => {
-  const set = app.extensionData
+  const set = app.registry
     .for('fof-share-social')
     .registerSetting({
       label: app.translator.trans('fof-share-social.admin.settings.canonical-urls'),
@@ -39,7 +39,7 @@ app.initializers.add('fof/share-social', () => {
           o[network] = app.translator.trans(`fof-share-social.lib.networks.${network}`);
           return o;
         },
-        { '': '' } as SelectSettingComponentOptions['options']
+        { '': '' } as SelectFieldComponentOptions['options']
       ),
     })
     .registerSetting(function () {

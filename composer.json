@@ -19,11 +19,7 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0",
-        "flarum/core": "^1.8.0"
-    },
-    "suggest": {
-        "blomstra/fontawesome": "Enables Font Awesome 6, which includes the X (Twitter) icon"
+        "flarum/core": "^2.0.0"
     },
     "replace": {
         "avatar4eg/flarum-ext-share-social": "*"
@@ -41,6 +37,9 @@
         }
     },
     "extra": {
+        "branch-alias": {
+            "dev-2.x": "2.x-dev"
+        },
         "flarum-extension": {
             "title": "FoF Share Social",
             "category": "feature",
@@ -50,9 +49,6 @@
                 "color": "#fff"
             }
         },
-        "optional-dependencies": [
-            "blomstra/fontawesome"
-        ],
         "flarum-cli": {
             "modules": {
                 "githubActions": true
@@ -60,8 +56,7 @@
         }
     },
     "require-dev": {
-        "flarum/phpstan": "*",
-        "blomstra/fontawesome": "*"
+        "flarum/phpstan": "^2.0.0"
     },
     "scripts": {
         "analyse:phpstan": "phpstan analyse",
@@ -69,5 +64,7 @@
     },
     "scripts-descriptions": {
         "analyse:phpstan": "Run static analysis"
-    }
+    },
+    "minimum-stability": "beta",
+    "prefer-stable": true
 }

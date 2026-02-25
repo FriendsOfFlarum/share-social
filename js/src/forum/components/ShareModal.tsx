@@ -1,19 +1,21 @@
+import Form from 'flarum/common/components/Form';
 import app from 'flarum/forum/app';
-import Modal, { IInternalModalAttrs } from 'flarum/common/components/Modal';
+import { IFormModalAttrs } from 'flarum/common/components/FormModal';
+import FormModal from 'flarum/common/components/FormModal';
 import Button from 'flarum/common/components/Button';
-import icon from 'flarum/common/helpers/icon';
+import Icon from 'flarum/common/components/Icon';
 import ItemList from 'flarum/common/utils/ItemList';
 import Mithril from 'mithril';
 
 import { getNetworkButtons } from '../util/networks';
 import { ShareableDiscussion } from '../util/share';
 
-export interface IShareModalAttrs extends IInternalModalAttrs {
+export interface IShareModalAttrs extends IFormModalAttrs {
   networks: string[];
   discussion: ShareableDiscussion;
 }
 
-export default class ShareModal extends Modal<IShareModalAttrs> {
+export default class ShareModal extends FormModal<IShareModalAttrs> {
   discussion!: ShareableDiscussion;
 
   oninit(vnode: Mithril.Vnode<IShareModalAttrs, this>) {
@@ -33,9 +35,9 @@ export default class ShareModal extends Modal<IShareModalAttrs> {
   content(): Mithril.Children {
     return (
       <div className="Modal-body">
-        <div className="Form Form--centered">
+        <Form className="Form--centered">
           <div className="Form-group">{this.shareItems().toArray()}</div>
-        </div>
+        </Form>
       </div>
     );
   }
@@ -54,7 +56,7 @@ export default class ShareModal extends Modal<IShareModalAttrs> {
             aria-label={app.translator.trans('fof-share-social.forum.modal.copy_button')}
             onclick={this.copy.bind(this)}
           >
-            {icon('fas fa-copy fa-check')}
+            <Icon name="fas fa-copy fa-check" />
           </Button>
         </div>
       );
