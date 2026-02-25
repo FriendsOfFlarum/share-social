@@ -2,7 +2,7 @@ import app from 'flarum/forum/app';
 import ItemList from 'flarum/common/utils/ItemList';
 import Button from 'flarum/common/components/Button';
 import classList from 'flarum/common/utils/classList';
-import { data, networkIcons, networks, ShareableDiscussion } from './share';
+import { data, getNetworkIcon, networks, ShareableDiscussion } from './share';
 import pupa from 'pupa';
 import Mithril from 'mithril';
 
@@ -18,7 +18,7 @@ export const getNetworkButton = ({
   return (
     <Button
       className={classList(`Button Button--block Share--${network}`, isRounded && 'Button--rounded')}
-      icon={`${networkIcons[network] || `fab fa-${network}`} fa-lg fa-fw`}
+      icon={`${getNetworkIcon(network)} fa-lg fa-fw`}
       onclick={onNetworkButtonClick.bind(null, network, discussion)}
     >
       {app.translator.trans(`fof-share-social.lib.networks.${network}`)}
