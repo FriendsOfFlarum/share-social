@@ -40,7 +40,7 @@ return [
     (new Extend\Conditional())
         ->whenExtensionEnabled('blomstra-fontawesome', fn () => [
             (new Extend\ApiSerializer(ForumSerializer::class))
-                ->attribute('fof-share-social.fa6Enabled', fn() => true),
+                ->attribute('fof-share-social.fa6Enabled', fn () => true),
 
             (new Extend\Theme())
                 ->addCustomLessVariable('fof-share-social--twitter-color', fn () => '#000000'),
