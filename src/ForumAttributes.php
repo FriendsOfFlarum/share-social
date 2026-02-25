@@ -16,16 +16,12 @@ use Flarum\Settings\SettingsRepositoryInterface;
 
 class ForumAttributes
 {
-    /** @var SettingsRepositoryInterface */
-    protected $settings;
-
     const PREFIX = 'fof-share-social.networks.';
 
     const KEYS = ['facebook', 'twitter', 'linkedin', 'reddit', 'whatsapp', 'telegram', 'vkontakte', 'odnoklassniki', 'my_mail', 'qq', 'qzone', 'native'];
 
-    public function __construct(SettingsRepositoryInterface $settings)
+    public function __construct(protected SettingsRepositoryInterface $settings)
     {
-        $this->settings = $settings;
     }
 
     public function __invoke(ForumSerializer $serializer): array

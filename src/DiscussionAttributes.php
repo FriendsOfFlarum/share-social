@@ -18,20 +18,8 @@ use Flarum\Settings\SettingsRepositoryInterface;
 
 class DiscussionAttributes
 {
-    /**
-     * @var SettingsRepositoryInterface
-     */
-    protected $settings;
-
-    /**
-     * @var UrlGenerator
-     */
-    protected $url;
-
-    public function __construct(SettingsRepositoryInterface $settings, UrlGenerator $url)
+    public function __construct(protected SettingsRepositoryInterface $settings, protected UrlGenerator $url)
     {
-        $this->settings = $settings;
-        $this->url = $url;
     }
 
     public function __invoke(DiscussionSerializer $serializer, Discussion $discussion, array $attributes): array
