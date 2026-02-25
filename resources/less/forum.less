@@ -18,6 +18,19 @@
   }
 }
 
+.item-share-social {
+  // Keep the ButtonGroup's main + toggle buttons on one line on mobile
+  @media @phone {
+    .ButtonGroup {
+      display: inline-flex;
+
+      > .Button {
+        float: none;
+      }
+    }
+  }
+}
+
 .item-share-social .Dropdown {
   &:not(.itemCount1) {
     .SplitDropdown-button {
