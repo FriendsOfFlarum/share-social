@@ -7,6 +7,7 @@ export type ShareData = {
 type NetworkAction = string | ((data: ShareData) => void);
 export declare const networks: Record<string, NetworkAction>;
 export declare const networkIcons: Record<string, string>;
+export declare const getNetworkIcon: (network: string) => string;
 export type ShareableDiscussion = Discussion & {
     shareUrl: () => string;
 };
