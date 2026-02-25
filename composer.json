@@ -19,8 +19,8 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0",
-        "flarum/core": "^1.8.0"
+        "php": "^8.2",
+        "flarum/core": "^2.0.0-beta"
     },
     "suggest": {
         "blomstra/fontawesome": "Enables Font Awesome 6, which includes the X (Twitter) icon"
@@ -60,7 +60,7 @@
         }
     },
     "require-dev": {
-        "flarum/phpstan": "*",
+        "flarum/phpstan": "^2.0.0-beta",
         "blomstra/fontawesome": "*"
     },
     "scripts": {
