@@ -14,6 +14,10 @@ namespace FoF\ShareSocial;
 use Flarum\Api\Serializer\DiscussionSerializer;
 use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Extend;
+use Flarum\Api\Context;
+use Flarum\Api\Endpoint;
+use Flarum\Api\Resource;
+use Flarum\Api\Schema;
 
 return [
     (new Extend\Frontend('forum'))
@@ -31,14 +35,17 @@ return [
         ->serializeToForum('fof-share-social.plain-copy', 'fof-share-social.plain-copy')
         ->serializeToForum('fof-share-social.default', 'fof-share-social.default-option'),
 
+    // @TODO: Replace with the new implementation https://docs.flarum.org/2.x/extend/api#extending-api-resources
     (new Extend\ApiSerializer(ForumSerializer::class))
         ->attributes(ForumAttributes::class),
 
+    // @TODO: Replace with the new implementation https://docs.flarum.org/2.x/extend/api#extending-api-resources
     (new Extend\ApiSerializer(DiscussionSerializer::class))
         ->attributes(DiscussionAttributes::class),
 
     (new Extend\Conditional())
         ->whenExtensionEnabled('blomstra-fontawesome', fn () => [
+            // @TODO: Replace with the new implementation https://docs.flarum.org/2.x/extend/api#extending-api-resources
             (new Extend\ApiSerializer(ForumSerializer::class))
                 ->attribute('fof-share-social.fa6Enabled', fn () => true),
 
