@@ -11,13 +11,12 @@
 
 namespace FoF\ShareSocial;
 
-use Flarum\Api\Serializer\DiscussionSerializer;
-use Flarum\Api\Serializer\ForumSerializer;
-use Flarum\Extend;
-use Flarum\Api\Context;
-use Flarum\Api\Endpoint;
 use Flarum\Api\Resource;
 use Flarum\Api\Schema;
+use Flarum\Discussion\Discussion;
+use Flarum\Extend;
+use Flarum\Http\UrlGenerator;
+use Flarum\Settings\SettingsRepositoryInterface;
 
 return [
     (new Extend\Frontend('forum'))
@@ -35,25 +34,39 @@ return [
         ->serializeToForum('fof-share-social.plain-copy', 'fof-share-social.plain-copy')
         ->serializeToForum('fof-share-social.default', 'fof-share-social.default-option'),
 
-    // @TODO: Replace with the new implementation https://docs.flarum.org/2.x/extend/api#extending-api-resources
-    (new Extend\ApiSerializer(ForumSerializer::class))
-        ->attributes(ForumAttributes::class),
+    (new Extend\ApiResource(Resource\ForumResource::class))
+        ->fields(fn () => [
+            Schema\Arr::make('fof-share-social.networks')
+                ->get(function () {
+                    /** @var SettingsRepositoryInterface $settings */
+                    $settings = resolve(SettingsRepositoryInterface::class);
+                    $keys = ['facebook', 'twitter', 'linkedin', 'reddit', 'whatsapp', 'telegram', 'vkontakte', 'odnoklassniki', 'my_mail', 'qq', 'qzone', 'native'];
+                    $networks = [];
 
-    // @TODO: Replace with the new implementation https://docs.flarum.org/2.x/extend/api#extending-api-resources
-    (new Extend\ApiSerializer(DiscussionSerializer::class))
-        ->attributes(DiscussionAttributes::class),
+                    foreach ($keys as $key) {
+                        if ($settings->get('fof-share-social.networks.'.$key)) {
+                            $networks[] = $key;
+                        }
+                    }
 
-    (new Extend\Conditional())
-        ->whenExtensionEnabled('blomstra-fontawesome', fn () => [
-            // @TODO: Replace with the new implementation https://docs.flarum.org/2.x/extend/api#extending-api-resources
-            (new Extend\ApiSerializer(ForumSerializer::class))
-                ->attribute('fof-share-social.fa6Enabled', fn () => true),
+                    return $networks;
+                }),
+        ]),
 
-            (new Extend\Theme())
-                ->addCustomLessVariable('fof-share-social--twitter-color', fn () => '#000000'),
-        ])
-        ->whenExtensionDisabled('blomstra-fontawesome', fn () => [
-            (new Extend\Theme())
-                ->addCustomLessVariable('fof-share-social--twitter-color', fn () => '#00ACED'),
+    (new Extend\ApiResource(Resource\DiscussionResource::class))
+        ->fields(fn () => [
+            Schema\Str::make('shareUrl')
+                ->get(function (Discussion $discussion) {
+                    /** @var SettingsRepositoryInterface $settings */
+                    $settings = resolve(SettingsRepositoryInterface::class);
+                    /** @var UrlGenerator $url */
+                    $url = resolve(UrlGenerator::class);
+
+                    $canonical = (bool) $settings->get('fof-share-social.canonical-urls');
+
+                    return $url->to('forum')->route('discussion', [
+                        'id' => $discussion->id.($canonical ? (trim($discussion->slug) ? '-'.$discussion->slug : '') : ''),
+                    ]);
+                }),
         ]),
 ];
