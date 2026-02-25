@@ -1,3 +1,4 @@
+import app from 'flarum/forum/app';
 import { getPlainContent, truncate } from 'flarum/common/utils/string';
 import Discussion from 'flarum/common/models/Discussion';
 
@@ -32,6 +33,16 @@ export const networkIcons: Record<string, string> = {
   qq: 'fab fa-qq',
   qzone: 'fas fa-star',
   native: 'fas fa-share-square',
+};
+
+const networkIconsFA6: Record<string, string> = {
+  twitter: 'fab fa-x-twitter',
+};
+
+export const getNetworkIcon = (network: string): string => {
+  const fa6 = app.forum.attribute('fof-share-social.fa6Enabled') as boolean | undefined;
+  const icons = fa6 ? { ...networkIcons, ...networkIconsFA6 } : networkIcons;
+  return icons[network] || `fab fa-${network}`;
 };
 
 export type ShareableDiscussion = Discussion & { shareUrl: () => string };

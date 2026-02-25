@@ -21,6 +21,9 @@
     "require": {
         "flarum/core": "^1.8.0"
     },
+    "suggest": {
+        "blomstra/fontawesome": "Enables Font Awesome 6, which includes the X (Twitter) icon"
+    },
     "replace": {
         "avatar4eg/flarum-ext-share-social": "*"
     },
@@ -46,9 +49,9 @@
                 "color": "#fff"
             }
         },
-        "flagrow": {
-            "discuss": "https://discuss.flarum.org/d/20401"
-        },
+        "optional-dependencies": [
+            "blomstra/fontawesome"
+        ],
         "flarum-cli": {
             "modules": {
                 "githubActions": true
@@ -56,7 +59,8 @@
         }
     },
     "require-dev": {
-        "flarum/phpstan": "*"
+        "flarum/phpstan": "*",
+        "blomstra/fontawesome": "*"
     },
     "scripts": {
         "analyse:phpstan": "phpstan analyse",
