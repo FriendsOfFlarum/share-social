@@ -23,6 +23,16 @@ composer require fof/share-social
 composer update fof/share-social
 ```
 
+### X (Twitter) icon
+
+By default, the X/Twitter button uses the classic Twitter bird icon (Font Awesome 5, which Flarum ships with) and the Twitter blue colour.
+
+To get the proper X logo and black brand colour, install [blomstra/fontawesome](https://discuss.flarum.org/d/31219-blomstra-font-awesome-6) and configure it with a Font Awesome **6.5.2 or later** kit. The `x-twitter` icon was introduced in FA 6.5.2 — older kit versions will show a blank icon.
+
+```sh
+composer require blomstra/fontawesome
+```
+
 ### Links
 
 - [Packagist](https://packagist.org/packages/fof/share-social)
