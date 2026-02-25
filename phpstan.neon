@@ -5,7 +5,6 @@ parameters:
   level: 6
   paths:
     - extend.php
-    - src
   excludePaths:
     - *.blade.php
   databaseMigrationsPath: ['migrations']
