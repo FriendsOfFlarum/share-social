@@ -38,15 +38,15 @@ return [
         ->attributes(DiscussionAttributes::class),
 
     (new Extend\Conditional())
-        ->whenExtensionEnabled('blomstra-fontawesome', fn() => [
+        ->whenExtensionEnabled('blomstra-fontawesome', fn () => [
             (new Extend\ApiSerializer(ForumSerializer::class))
                 ->attribute('fof-share-social.fa6Enabled', true),
 
             (new Extend\Theme())
-                ->addCustomLessVariable('fof-share-social--twitter-color', fn() => '#000000'),
+                ->addCustomLessVariable('fof-share-social--twitter-color', fn () => '#000000'),
         ])
-        ->whenExtensionDisabled('blomstra-fontawesome', fn() => [
+        ->whenExtensionDisabled('blomstra-fontawesome', fn () => [
             (new Extend\Theme())
-                ->addCustomLessVariable('fof-share-social--twitter-color', fn() => '#00ACED'),
-        ])
+                ->addCustomLessVariable('fof-share-social--twitter-color', fn () => '#00ACED'),
+        ]),
 ];
