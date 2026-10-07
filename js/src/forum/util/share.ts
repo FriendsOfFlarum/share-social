@@ -23,7 +23,12 @@ export const networks: Record<string, NetworkAction> = {
   qq: '//connect.qq.com/widget/shareqq/iframe_index.html?url={url}&title={title}',
   qzone: '//sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url={url}&summary={description}&title={title}',
 
-  native: (shareData) => navigator.share(getNativeData(shareData)),
+  // Dismissing the share sheet rejects with an AbortError: the reader changed
+  // their mind, which isn't a failure. Anything else still is.
+  native: (shareData) =>
+    navigator.share(getNativeData(shareData)).catch((error) => {
+      if (error?.name !== 'AbortError') throw error;
+    }),
 };
 
 export const networkIcons: Record<string, string> = {
